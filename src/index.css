@@ -1,0 +1,93 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Montserrat', sans-serif;
+} */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-hero: #70C5D7;
+  --color-background: #ffffff;
+  --color-cta: #DA3A60;
+  --color-text-dark: #005482;
+  --color-text-light: #ffffff;
+  --color-info: #70C5D7;
+}
+
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+    @apply overflow-x-hidden;
+    background-color: var(--color-background);
+  }
+
+  body {
+    @apply min-h-screen w-full overflow-x-hidden;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-text-dark);
+  }
+
+  #root {
+    @apply w-full min-h-screen flex flex-col overflow-x-hidden;
+  }
+}
+
+/* Global section styles */
+.section-container {
+  @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+  max-width: min(100%, 1920px);
+}
+
+/* Full width section style */
+.full-width-section {
+  @apply w-screen relative;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-montserrat font-bold;
+  color: var(--color-text-dark);
+}
+
+p {
+  @apply font-montserrat;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--color-cta);
+  color: var(--color-text-light);
+  @apply hover:opacity-90 transition-opacity;
+}
+
+/* Background styles */
+.bg-hero {
+  background-color: var(--color-hero);
+}
+
+.bg-info {
+  background-color: var(--color-info);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: #FFFFFF;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-top;
+}
+
+@keyframes blink {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}

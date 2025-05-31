@@ -430,7 +430,11 @@ const languages = {
   }
 };
 
-export const LanguageContext = createContext();
+// Move context creation to a separate constant
+const LanguageContext = createContext();
+
+// Export context separately
+export { LanguageContext };
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);

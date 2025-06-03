@@ -45,6 +45,7 @@ import AddBlog from "../pages/Dashboard/AddBlog/AddBlog";
 import AllBlog from "../pages/Dashboard/AllBlog/AllBlog";
 import FindTeacherGuide from "../pages/FindTeacherGuide/FindTeacherGuide";
 import BecomeTeacherGuide from "../pages/BecomeTeacherGuide/BecomeTeacherGuide";
+import Contact from "../pages/Contact";
 
 // Custom wrapper to restrict routes to admins
 const AdminRoute = ({ children }) => {
@@ -76,7 +77,7 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "blog",
+        path: "blogs",
         element: <Blog />,
       },
       {
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
       {
         path: "become-teacher",
         element: <BecomeTeacherGuide />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
       }
     ],
   },

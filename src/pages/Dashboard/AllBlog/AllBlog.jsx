@@ -103,36 +103,36 @@ const AllBlog = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-3 sm:p-4 md:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[var(--color-text-dark)] mb-2">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--color-text-dark)] mb-2">
             Manage Blogs
           </h2>
-          <p className="text-gray-600">Total Blogs: {blogs.length}</p>
+          <p className="text-sm sm:text-base text-gray-600">Total Blogs: {blogs.length}</p>
         </div>
 
         {/* Controls Section */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="flex-1 w-full md:w-auto">
+        <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
+            <div className="flex-1 w-full">
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Search blogs..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-text-dark)] focus:border-transparent"
+                  className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-text-dark)] focus:border-transparent"
                 />
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm sm:text-base" />
               </div>
             </div>
-            <div className="flex gap-4 w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-text-dark)] focus:border-transparent"
+                className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-text-dark)] focus:border-transparent"
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
@@ -141,9 +141,9 @@ const AllBlog = () => {
               </select>
               <button
                 onClick={() => handleSort('title')}
-                className="flex items-center gap-2 px-4 py-2 bg-[var(--color-text-dark)] text-white rounded-lg hover:bg-opacity-90 transition-colors"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-[var(--color-text-dark)] text-white text-sm sm:text-base rounded-lg hover:bg-opacity-90 transition-colors"
               >
-                {sortOrder === 'asc' ? <FaSortAmountUp /> : <FaSortAmountDown />}
+                {sortOrder === 'asc' ? <FaSortAmountUp className="text-sm sm:text-base" /> : <FaSortAmountDown className="text-sm sm:text-base" />}
                 Sort
               </button>
             </div>
@@ -151,38 +151,38 @@ const AllBlog = () => {
         </div>
 
         {/* Blogs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {isLoading ? (
             Array(6).fill(0).map((_, index) => <SkeletonCard key={index} />)
           ) : blogs.length === 0 ? (
-            <div className="col-span-full text-center py-10">
-              <p className="text-gray-500 text-lg">No blogs found matching your criteria.</p>
+            <div className="col-span-full text-center py-8 sm:py-10">
+              <p className="text-gray-500 text-base sm:text-lg">No blogs found matching your criteria.</p>
             </div>
           ) : (
             blogs.map((blog) => (
               <div
                 key={blog._id}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
               >
-                <div className="p-6">
+                <div className="p-4 sm:p-6 flex flex-col flex-1">
                   {/* Header */}
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-16 h-16 rounded-full bg-[var(--color-text-dark)] flex items-center justify-center text-white text-xl font-semibold">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-4">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[var(--color-text-dark)] flex items-center justify-center text-white text-base sm:text-xl font-semibold">
                       {blog.title?.charAt(0).toUpperCase() || 'B'}
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-[var(--color-text-dark)] mb-1">{blog.title}</h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <FaUser className="text-gray-400" />
-                        <span>{blog.author || 'Unknown'}</span>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-xl font-bold text-[var(--color-text-dark)] mb-1 truncate">{blog.title}</h3>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                        <FaUser className="text-gray-400 text-xs sm:text-sm" />
+                        <span className="truncate">{blog.author || 'Unknown'}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Status Badge */}
-                  <div className="mb-4">
+                  <div className="mb-3 sm:mb-4">
                     <span
-                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                      className={`inline-flex items-center px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-medium ${
                         blog.status === 'published'
                           ? 'bg-green-100 text-green-800'
                           : blog.status === 'pending'
@@ -195,55 +195,55 @@ const AllBlog = () => {
                   </div>
 
                   {/* Info Grid */}
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center gap-2 text-sm">
-                      <FaBook className="text-[var(--color-text-dark)]" />
-                      <span className="text-gray-600">{blog.category || 'Category N/A'}</span>
+                  <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-3 sm:mb-4">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <FaBook className="text-[var(--color-text-dark)] text-xs sm:text-sm" />
+                      <span className="text-xs sm:text-sm text-gray-600 truncate">{blog.category || 'Category N/A'}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <FaClock className="text-[var(--color-text-dark)]" />
-                      <span className="text-gray-600">{blog.readTime || 'Time N/A'}</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <FaClock className="text-[var(--color-text-dark)] text-xs sm:text-sm" />
+                      <span className="text-xs sm:text-sm text-gray-600 truncate">{blog.readTime || 'Time N/A'}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <FaTag className="text-[var(--color-text-dark)]" />
-                      <span className="text-gray-600">{blog.languageLevel || 'Level N/A'}</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <FaTag className="text-[var(--color-text-dark)] text-xs sm:text-sm" />
+                      <span className="text-xs sm:text-sm text-gray-600 truncate">{blog.languageLevel || 'Level N/A'}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <FaBook className="text-[var(--color-text-dark)]" />
-                      <span className="text-gray-600">{blog.featured ? 'Featured' : 'Not Featured'}</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <FaBook className="text-[var(--color-text-dark)] text-xs sm:text-sm" />
+                      <span className="text-xs sm:text-sm text-gray-600 truncate">{blog.featured ? 'Featured' : 'Not Featured'}</span>
                     </div>
                   </div>
 
                   {/* Tags */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2">Tags:</h4>
-                    <div className="flex flex-wrap gap-2">
+                  <div className="mb-3 sm:mb-4">
+                    <h4 className="text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">Tags:</h4>
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {blog.tags && blog.tags.length > 0 ? (
                         blog.tags.map((tag, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 bg-[var(--color-text-dark)] text-white rounded-full text-xs font-medium"
+                            className="px-2 sm:px-3 py-0.5 sm:py-1 bg-[var(--color-text-dark)] text-white rounded-full text-xs font-medium"
                           >
                             {tag}
                           </span>
                         ))
                       ) : (
-                        <span className="text-sm text-gray-500">No tags listed</span>
+                        <span className="text-xs sm:text-sm text-gray-500">No tags listed</span>
                       )}
                     </div>
                   </div>
 
                   {/* Excerpt */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2">Excerpt:</h4>
-                    <p className="text-sm text-gray-600">{blog.excerpt || 'No excerpt available'}</p>
+                  <div className="flex-1">
+                    <h4 className="text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">Excerpt:</h4>
+                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-3">{blog.excerpt || 'No excerpt available'}</p>
                   </div>
 
                   {/* Actions */}
-                  <div className="flex justify-end gap-2 mt-4 pt-4 border-t">
+                  <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100 flex justify-end">
                     <button
                       onClick={() => handleDelete(blog)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-[var(--color-cta)] text-white rounded-lg text-sm hover:bg-opacity-90 transition-colors"
+                      className="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[var(--color-cta)] text-white rounded-lg text-xs sm:text-sm hover:bg-opacity-90 transition-colors"
                     >
                       <FaTrash className="text-xs" />
                       <span>Delete</span>
@@ -258,21 +258,21 @@ const AllBlog = () => {
         {/* Delete Confirmation Modal */}
         {isDeleteConfirmOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Confirm Delete</h3>
-              <p className="text-gray-600 mb-6">
+            <div className="bg-white rounded-lg p-4 sm:p-6 max-w-sm w-full mx-4">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Confirm Delete</h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
                 Are you sure you want to delete "{blogToDelete?.title}"? This action cannot be undone.
               </p>
-              <div className="flex justify-end gap-3">
+              <div className="flex justify-end gap-2 sm:gap-3">
                 <button
                   onClick={() => setIsDeleteConfirmOpen(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
-                  className="px-4 py-2 bg-[var(--color-cta)] text-white rounded-lg hover:bg-opacity-90"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base bg-[var(--color-cta)] text-white rounded-lg hover:bg-opacity-90"
                   disabled={deleteBlogMutation.isLoading}
                 >
                   {deleteBlogMutation.isLoading ? 'Deleting...' : 'Delete'}

@@ -1,133 +1,93 @@
-// import React from "react";
-// import { NavLink } from "react-router-dom";
-
-
-// const Footer = () => {
-//   return (
-//     <footer className="bg-gradient-to-r from-blue-600 via-purple-500 to-indigo-600 text-white py-6 mt-10">
-//       <div className="container mx-auto text-center md:text-left px-6">
-//         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-//           {/* Company Info */}
-//           <div>
-//             <h2 className="text-lg font-bold mb-2">LesonPaw</h2>
-//             <p className="text-sm">
-//               Organize your tasks efficiently and boost productivity with our seamless task management system.
-//             </p>
-//           </div>
-
-//           {/* Quick Links */}
-//           <div>
-//             <h2 className="text-lg font-bold mb-2">Quick Links</h2>
-//             <ul className="space-y-2">
-//               <li>
-//                 <NavLink to="/" className="hover:underline">
-//                   Home
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink to="/add" className="hover:underline">
-//                   Add Task
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink to="/login" className="hover:underline">
-//                   Login
-//                 </NavLink>
-//               </li>
-//             </ul>
-//           </div>
-
-//           {/* Contact Information */}
-//           <div>
-//             <h2 className="text-lg font-bold mb-2">Contact Us</h2>
-//             <p>Email: rayhanahmed.nstu@gmail.com</p>
-//             <p>Phone: +123 456 7890</p>
-//             <p>Address: 123 Farmgate, Dhaka</p>
-//           </div>
-//         </div>
-
-//         {/* Bottom Section */}
-//         <div className="border-t border-gray-300 mt-6 pt-4 text-sm text-gray-200 text-center">
-//           &copy; {new Date().getFullYear()} LessonPaw. All rights reserved.
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// };
-
-// export default Footer;
-
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { FaFacebookF, FaTwitter, FaInstagram, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { useLanguage } from '../../providers/LanguageProvider';
+import logo from '../../assets/Logo.png';
 
 const Footer = () => {
+  const { translate } = useLanguage();
+
   return (
-    <footer className="full-width-section" style={{ backgroundColor: "var(--color-text-dark)" }}>
-      <div className="section-container py-8 md:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+    <footer className="bg-[#005482] text-white w-full">
+      <div className="max-w-[1920px] mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
-          <div className="text-center sm:text-left space-y-4">
-            <h2 className="text-xl md:text-2xl font-bold text-white">LesonPaw</h2>
-            <p className="text-sm md:text-base text-white">
-              Organize your tasks efficiently and boost productivity with our seamless task management system.
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <img src={logo} alt="LessonPaw" className="h-8 w-auto" />
+              <h2 className="text-2xl font-bold">LessonPaw</h2>
+            </div>
+            <p className="text-gray-300">
+              {translate('connectingStudents')}
             </p>
+            <div className="flex space-x-4">
+              <a href="https://facebook.com" className="hover:text-[#DA3A60] transition-colors">
+                <FaFacebookF size={20} />
+              </a>
+              <a href="https://twitter.com" className="hover:text-[#DA3A60] transition-colors">
+                <FaTwitter size={20} />
+              </a>
+              <a href="https://instagram.com" className="hover:text-[#DA3A60] transition-colors">
+                <FaInstagram size={20} />
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div className="text-center sm:text-left space-y-4">
-            <h2 className="text-xl md:text-2xl font-bold text-white">Quick Links</h2>
+          <div>
+            <h3 className="text-xl font-semibold mb-4">{translate('quickLinks')}</h3>
             <ul className="space-y-2">
-              <li>
-                <NavLink 
-                  to="/" 
-                  className="text-sm md:text-base text-white hover:text-[var(--color-hero)] transition-colors inline-block"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink 
-                  to="/about" 
-                  className="text-sm md:text-base text-white hover:text-[var(--color-hero)] transition-colors inline-block"
-                >
-                  About Us
-                </NavLink>
-              </li>
-              <li>
-                <NavLink 
-                  to="/blog" 
-                  className="text-sm md:text-base text-white hover:text-[var(--color-hero)] transition-colors inline-block"
-                >
-                  Blog
-                </NavLink>
-              </li>
+              <li><Link to="/" className="hover:text-[#DA3A60] transition-colors">{translate('home')}</Link></li>
+              <li><Link to="/find-teacher" className="hover:text-[#DA3A60] transition-colors">{translate('findTeacher')}</Link></li>
+              <li><Link to="/become-teacher" className="hover:text-[#DA3A60] transition-colors">{translate('becomeTeacher')}</Link></li>
+              <li><Link to="/about" className="hover:text-[#DA3A60] transition-colors">{translate('about')}</Link></li>
+              <li><Link to="/contact" className="hover:text-[#DA3A60] transition-colors">{translate('contactUs')}</Link></li>
+              <li><Link to="/blog" className="hover:text-[#DA3A60] transition-colors">{translate('blog')}</Link></li>
             </ul>
           </div>
 
-          {/* Contact Information */}
-          <div className="text-center sm:text-left space-y-4">
-            <h2 className="text-xl md:text-2xl font-bold text-white">Contact Us</h2>
-            <div className="space-y-2 text-sm md:text-base text-white">
-              <p className="flex items-center gap-2">
-                <span>📧</span> rayhanahmed.nstu@gmail.com
-              </p>
-              <p className="flex items-center gap-2">
-                <span>📞</span> +123 456 7890
-              </p>
-              <p className="flex items-center gap-2">
-                <span>📍</span> 123 Farmgate, Dhaka
-              </p>
-            </div>
+          {/* Subjects */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">{translate('subjects')}</h3>
+            <ul className="space-y-2">
+              <li><Link to="/subjects/mathematics" className="hover:text-[#DA3A60] transition-colors">{translate('mathematics')}</Link></li>
+              <li><Link to="/subjects/sciences" className="hover:text-[#DA3A60] transition-colors">{translate('sciences')}</Link></li>
+              <li><Link to="/subjects/languages" className="hover:text-[#DA3A60] transition-colors">{translate('languages')}</Link></li>
+              <li><Link to="/subjects/history" className="hover:text-[#DA3A60] transition-colors">{translate('history')}</Link></li>
+              <li><Link to="/subjects/computer-science" className="hover:text-[#DA3A60] transition-colors">{translate('computerScience')}</Link></li>
+              <li><Link to="/subjects/arts-music" className="hover:text-[#DA3A60] transition-colors">{translate('artsMusic')}</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">{translate('contactUs')}</h3>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-3">
+                <FaMapMarkerAlt className="text-[#DA3A60]" />
+                <span>123 Delmas Street, Port-au-Prince, Haiti</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <FaPhone className="text-[#DA3A60]" />
+                <span>+509 2222-3333</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <FaEnvelope className="text-[#DA3A60]" />
+                <span>info@lessonpaw.com</span>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-white/10 mt-8 md:mt-12 pt-4 text-sm text-center text-white">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p>&copy; {new Date().getFullYear()} LessonPaw. All rights reserved.</p>
-            <div className="flex items-center gap-4">
-              <a href="#" className="hover:text-[var(--color-hero)] transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-[var(--color-hero)] transition-colors">Terms of Service</a>
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-700">
+        <div className="max-w-[1920px] mx-auto px-6 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400">{translate('allRightsReserved')}</p>
+            <div className="flex items-center gap-6 text-gray-400">
+              <Link to="/privacy-policy" className="hover:text-white transition-colors">{translate('privacyPolicy')}</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">{translate('termsOfService')}</Link>
+              <Link to="/cookies" className="hover:text-white transition-colors">{translate('cookies')}</Link>
             </div>
           </div>
         </div>
@@ -137,4 +97,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

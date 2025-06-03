@@ -2,90 +2,53 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaBook, FaUser, FaSearch, FaClock, FaTag, FaChevronRight, FaCalendarAlt } from 'react-icons/fa';
+import { FaBook, FaUser, FaSearch, FaClock, FaTag, FaChevronRight, FaCalendarAlt, FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Loading from '../../components/Loading/Loading';
 
-const BlogHeader = ({ title, subtitle }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    className="relative py-20 bg-gradient-to-r from-[#005482] to-[#70C5D7] overflow-hidden"
-  >
-    {/* Decorative Elements */}
-    <div className="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-white/20 rounded-tl-3xl"></div>
-    <div className="absolute bottom-0 right-0 w-24 h-24 border-b-4 border-r-4 border-white/20 rounded-br-3xl"></div>
-    
-    <div className="relative z-10 text-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex flex-col items-center"
-      >
-        <h1 className="text-6xl font-bold text-white mb-6 relative">
-          {title}
-          <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#FCBB45]"></div>
-        </h1>
-        
-        <div className="flex items-center gap-4 mb-8">
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: '4rem' }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="h-0.5 bg-[#DA3A60]"
-          ></motion.div>
-          <div className="w-2 h-2 rounded-full bg-white"></div>
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: '4rem' }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="h-0.5 bg-[#DA3A60]"
-          ></motion.div>
-        </div>
-
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-2xl text-white/90 max-w-3xl mx-auto px-4 leading-relaxed"
-        >
-          {subtitle}
-        </motion.p>
-      </motion.div>
+const BlogHeader = () => (
+  <div className="text-center py-8 sm:py-12 px-4 bg-gradient-to-b from-[#70C5D7]/10 to-transparent">
+    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
+      <span className="text-[#005482]">Our</span>
+      <span className="text-[#DA3A60]"> Blogs</span>
+    </h1>
+    <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto">
+      LesonPaw e-commerce is a new growing one of the best online shopping in bd. We are proud to achieve more confidence in a very short time. LesonPaw sells a different kind of premium quality and original product such as Men Fashion, Women Fashion, Kids & Mom, Home Decor, Mobile & Computer, Sports & Fitness and many more.
+    </p>
+    <div className="relative max-w-2xl mx-auto mt-6 sm:mt-8 px-4 sm:px-0">
+      <input
+        type="text"
+        placeholder="Search blogs Here"
+        className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#70C5D7] focus:border-transparent text-sm sm:text-base"
+      />
+      <button className="absolute right-6 sm:right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#005482] to-[#70C5D7] text-white px-4 sm:px-8 py-2 sm:py-3 rounded-full hover:opacity-90 transition-all">
+        <FaSearch className="text-base sm:text-lg" />
+      </button>
     </div>
-
-    {/* Background Decorative Elements */}
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute -top-4 -left-4 w-24 h-24 bg-white/5 rounded-full"></div>
-      <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/5 rounded-full"></div>
-      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/5 rounded-full"></div>
-      <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-white/5 rounded-full"></div>
-    </div>
-  </motion.div>
+  </div>
 );
 
-const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => (
-  <div className="flex flex-wrap gap-3 justify-center mb-8">
+const CategoryTabs = ({ categories, activeCategory, onCategoryChange }) => (
+  <div className="flex items-center justify-start gap-2 sm:gap-4 mb-8 sm:mb-12 overflow-x-auto pb-4 px-4 scrollbar-hide">
     <button
       onClick={() => onCategoryChange('all')}
-      className={`px-4 py-2 rounded-full transition-all ${
+      className={`whitespace-nowrap px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base transition-all ${
         activeCategory === 'all'
-          ? 'bg-[#005482] text-white'
-          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          ? 'bg-gradient-to-r from-[#005482] to-[#70C5D7] text-white'
+          : 'bg-gray-100 text-gray-700 hover:bg-[#70C5D7]/10'
       }`}
     >
-      All Posts
+      All Categories
     </button>
     {categories.map((category) => (
       <button
         key={category}
         onClick={() => onCategoryChange(category)}
-        className={`px-4 py-2 rounded-full transition-all ${
+        className={`whitespace-nowrap px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base transition-all ${
           activeCategory === category
-            ? 'bg-[#005482] text-white'
-            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            ? 'bg-gradient-to-r from-[#005482] to-[#70C5D7] text-white'
+            : 'bg-gray-100 text-gray-700 hover:bg-[#70C5D7]/10'
         }`}
       >
         {category}
@@ -99,37 +62,30 @@ const FeaturedPost = ({ post }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="relative group overflow-hidden rounded-2xl shadow-lg mb-12"
+    className="relative group rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg mb-8 sm:mb-12 aspect-[16/10] sm:aspect-[16/9]"
   >
-    <div className="aspect-[16/9] overflow-hidden">
-      <img
-        src={post.imageURL || 'https://placehold.co/800x450?text=Featured+Post'}
-        alt={post.title}
-        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-      />
-    </div>
-    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-      <div className="absolute bottom-0 p-8">
-        <div className="flex items-center gap-4 text-white/80 mb-4">
-          <span className="flex items-center gap-2">
-            <FaUser className="text-sm" />
-            {post.author}
+    <img
+      src={post.imageURL || 'https://placehold.co/1200x675?text=Featured+Post'}
+      alt={post.title}
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-[#005482]/90 via-black/50 to-transparent flex items-end">
+      <div className="p-4 sm:p-8 w-full">
+        <div className="flex items-center gap-2 sm:gap-4 text-white/80 mb-3 sm:mb-4 text-sm">
+          <span className="bg-gradient-to-r from-[#DA3A60] to-[#70C5D7] text-white text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
+            {post.category || 'TV Tips'}
           </span>
-          <span className="flex items-center gap-2">
-            <FaCalendarAlt className="text-sm" />
-            {new Date(post.createdAt).toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
+          <span className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+            <FaCalendarAlt className="text-xs sm:text-sm" />
+            {new Date(post.createdAt).toLocaleDateString()}
           </span>
         </div>
-        <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-[#FCBB45] transition-colors">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-4 group-hover:text-[#FCBB45] transition-colors line-clamp-2">
           {post.title}
         </h2>
-        <p className="text-white/90 mb-6 line-clamp-2">{post.excerpt}</p>
-        <button className="flex items-center gap-2 text-[#FCBB45] hover:text-white transition-colors">
-          Read More <FaChevronRight className="text-sm" />
+        <p className="text-white/90 mb-4 sm:mb-6 line-clamp-2 text-sm sm:text-base">{post.excerpt}</p>
+        <button className="flex items-center gap-1 sm:gap-2 text-[#70C5D7] hover:text-[#FCBB45] transition-colors text-sm sm:text-base">
+          Read More <FaChevronRight className="text-xs sm:text-sm" />
         </button>
       </div>
     </div>
@@ -141,43 +97,62 @@ const BlogCard = ({ post, index }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+    className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group"
   >
-    <div className="aspect-[16/9] overflow-hidden">
+    <div className="relative aspect-[16/10] sm:aspect-video overflow-hidden">
       <img
-        src={post.imageURL || 'https://placehold.co/400x225?text=Blog+Post'}
+        src={post.imageURL || 'https://placehold.co/600x400?text=Blog+Post'}
         alt={post.title}
-        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
       />
-    </div>
-    <div className="p-6">
-      <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-        <span className="flex items-center gap-1">
-          <FaClock className="text-[#DA3A60]" />
-          {post.readTime}
-        </span>
-        <span className="flex items-center gap-1">
-          <FaTag className="text-[#DA3A60]" />
-          {post.category}
+      <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+        <span className="bg-gradient-to-r from-[#DA3A60] to-[#70C5D7] text-white text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
+          {post.category || 'AC Servicing'}
         </span>
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-[#005482] transition-colors">
+    </div>
+    
+    <div className="p-4 sm:p-6">
+      <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-[#005482] transition-colors line-clamp-2">
         {post.title}
       </h3>
-      <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
+      <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 line-clamp-2">{post.excerpt || post.content}</p>
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-            <FaUser className="text-gray-500" />
-          </div>
-          <span className="text-sm text-gray-700">{post.author}</span>
+        <div className="flex items-center gap-1 sm:gap-2 text-[#70C5D7] text-xs sm:text-sm">
+          <FaCalendarAlt className="text-xs sm:text-sm" />
+          <span>{new Date(post.createdAt).toLocaleDateString()}</span>
         </div>
-        <button className="text-[#005482] hover:text-[#DA3A60] transition-colors flex items-center gap-1">
-          Read More <FaChevronRight className="text-sm" />
+        <button className="flex items-center gap-1 text-[#005482] hover:text-[#70C5D7] transition-colors text-xs sm:text-sm font-medium">
+          Read More <FaArrowRight className="text-xs" />
         </button>
       </div>
     </div>
   </motion.article>
+);
+
+const RecentPosts = ({ posts }) => (
+  <div className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-[#70C5D7]/10">
+    <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-[#005482]">Recent Posts</h3>
+    <div className="space-y-4 sm:space-y-6">
+      {posts.slice(0, 3).map((post, index) => (
+        <div key={index} className="flex items-start gap-3 sm:gap-4 group cursor-pointer hover:bg-[#70C5D7]/5 rounded-xl p-2 transition-colors">
+          <img
+            src={post.imageURL || 'https://placehold.co/100x100?text=Recent'}
+            alt={post.title}
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover"
+          />
+          <div>
+            <span className="text-xs sm:text-sm text-[#70C5D7] mb-1 block">
+              {new Date(post.createdAt).toLocaleDateString()}
+            </span>
+            <h4 className="font-medium text-sm sm:text-base text-gray-900 group-hover:text-[#005482] transition-colors line-clamp-2">
+              {post.title}
+            </h4>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 );
 
 const Blog = () => {
@@ -185,7 +160,7 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Fetch blogs
+  // Fetch blogs with loading state
   const { data: blogPosts = [], isLoading, error } = useQuery({
     queryKey: ['blogs'],
     queryFn: async () => {
@@ -212,26 +187,6 @@ const Blog = () => {
   // Get featured post (most recent)
   const featuredPost = blogPosts.length > 0 ? blogPosts[0] : null;
 
-  // Skeleton loader component
-  const SkeletonCard = () => (
-    <div className="bg-white rounded-xl shadow-md p-6 animate-pulse">
-      <div className="aspect-[16/9] bg-gray-200 rounded-lg mb-4"></div>
-      <div className="space-y-3">
-        <div className="h-4 bg-gray-200 rounded w-1/4"></div>
-        <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-        <div className="h-4 bg-gray-200 rounded w-full"></div>
-        <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-20"></div>
-          </div>
-          <div className="h-4 bg-gray-200 rounded w-24"></div>
-        </div>
-      </div>
-    </div>
-  );
-
   if (error) {
     toast.error(error.response?.data?.message || 'Failed to load blogs');
     return (
@@ -244,56 +199,69 @@ const Blog = () => {
     );
   }
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <BlogHeader
-        title="LessonPaw Blog"
-        subtitle="Discover insights, tips, and stories about education, tutoring, and personal growth"
-      />
+    <div className="min-h-screen bg-gradient-to-b from-[#70C5D7]/5 to-gray-50">
+      <BlogHeader />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search articles by title, category, or content..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-12 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005482] focus:border-transparent"
-            />
-            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+        <CategoryTabs
+          categories={categories}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
+
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            {!isLoading && featuredPost && (
+              <FeaturedPost post={featuredPost} />
+            )}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {isLoading
+                ? Array(4).fill(0).map((_, index) => (
+                    <div key={index} className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 animate-pulse">
+                      <div className="aspect-[16/10] sm:aspect-video bg-[#70C5D7]/10 rounded-xl sm:rounded-2xl mb-4"></div>
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="h-3 sm:h-4 bg-[#70C5D7]/10 rounded w-3/4"></div>
+                        <div className="h-3 sm:h-4 bg-[#70C5D7]/10 rounded w-1/2"></div>
+                      </div>
+                    </div>
+                  ))
+                : filteredPosts.slice(1).map((post, index) => (
+                    <BlogCard key={post._id} post={post} index={index} />
+                  ))}
+            </div>
+
+            {!isLoading && filteredPosts.length === 0 && (
+              <div className="text-center py-12 sm:py-16 bg-white rounded-2xl sm:rounded-3xl border border-[#70C5D7]/10">
+                <h3 className="text-xl sm:text-2xl font-semibold text-[#005482] mb-2 sm:mb-3">No Posts Found</h3>
+                <p className="text-sm sm:text-base text-gray-600">Try adjusting your search or category filter</p>
+              </div>
+            )}
+          </div>
+
+          <div className="space-y-6 sm:space-y-8">
+            <RecentPosts posts={blogPosts} />
+            
+            <div className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-[#70C5D7]/10">
+              <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-[#005482]">Tags</h3>
+              <div className="flex flex-wrap gap-2">
+                {['Education', 'Technology', 'Learning', 'Teaching', 'Students', 'Tips'].map((tag) => (
+                  <span 
+                    key={tag} 
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#70C5D7]/10 text-gray-700 rounded-full text-xs sm:text-sm hover:bg-[#005482] hover:text-white transition-colors cursor-pointer"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Featured Post */}
-        {!isLoading && featuredPost && <FeaturedPost post={featuredPost} />}
-
-        {/* Category Filter */}
-        {!isLoading && categories.length > 0 && (
-          <CategoryFilter
-            categories={categories}
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
-          />
-        )}
-
-        {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {isLoading
-            ? Array(6).fill(0).map((_, index) => <SkeletonCard key={index} />)
-            : filteredPosts.slice(1).map((post, index) => (
-                <BlogCard key={post._id} post={post} index={index} />
-              ))}
-        </div>
-
-        {/* No Results Message */}
-        {!isLoading && filteredPosts.length === 0 && (
-          <div className="text-center py-12">
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">No Posts Found</h3>
-            <p className="text-gray-600">Try adjusting your search or category filter</p>
-          </div>
-        )}
       </div>
     </div>
   );

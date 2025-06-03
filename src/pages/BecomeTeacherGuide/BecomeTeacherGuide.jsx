@@ -12,28 +12,28 @@ const BecomeTeacherGuide = () => {
       icon: <FaUserPlus className="text-4xl text-[#DA3A60]" />,
       title: "Build Your Profile",
       description: "Create a compelling teaching profile showcasing your expertise, teaching methodology, and professional achievements.",
-      image: "https://i.ibb.co/VqGtxK9/create-profile.png",
+      image: "https://res.cloudinary.com/duh7c5x99/image/upload/v1748764924/ChatGPT_Image_Jun_1_2025_at_02_01_14_PM_cdggww.png",
       animation: { x: [-100, 0], opacity: [0, 1] }
     },
     {
       icon: <FaClipboardCheck className="text-4xl text-[#70C5D7]" />,
       title: "Quality Verification",
       description: "Our thorough verification process ensures high teaching standards. Submit your credentials and teaching certifications.",
-      image: "https://i.ibb.co/4Wm0Xj2/verification.png",
+      image: "https://res.cloudinary.com/duh7c5x99/image/upload/v1748760517/ChatGPT_Image_Jun_1_2025_at_12_47_04_PM_cray1l.png",
       animation: { y: [100, 0], opacity: [0, 1] }
     },
     {
       icon: <FaChalkboardTeacher className="text-4xl text-[#FCBB45]" />,
       title: "Customize Your Teaching",
       description: "Set your teaching preferences, rates, and availability. Choose between online and in-person instruction options.",
-      image: "https://i.ibb.co/9vXBRtk/schedule-setup.png",
+      image: "https://res.cloudinary.com/duh7c5x99/image/upload/v1748720655/M127_Online_Course_Illustrations_on_Yellow_Images_Creative_Store_-_65779_f0flir.jpg",
       animation: { x: [100, 0], opacity: [0, 1] }
     },
     {
       icon: <FaMoneyBillWave className="text-4xl text-[#DA3A60]" />,
       title: "Start Your Journey",
       description: "Connect with students, deliver engaging lessons, and grow your teaching business on our platform.",
-      image: "https://i.ibb.co/ZXk3L0B/start-teaching.png",
+      image: "https://res.cloudinary.com/duh7c5x99/image/upload/v1748720384/Career_growth_growing_business_or_leadership_to_overcome_challenge_motivation_to_succeed_career_development_or_ambition_to_success_concept_confidence_businesswoman_walking_up_growth_arrow_stair__alrvof.jpg",
       animation: { y: [-100, 0], opacity: [0, 1] }
     }
   ];
@@ -126,14 +126,17 @@ const BecomeTeacherGuide = () => {
 
       {/* Steps Section with Enhanced Visual Design */}
       <div className="max-w-7xl mx-auto px-6 py-24">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-20 bg-gradient-to-r from-[#005482] to-[#70C5D7] text-transparent bg-clip-text"
-        >
-          Your Teaching Journey Begins Here
-        </motion.h2>
+        <div className="text-center mb-20">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-[#005482] via-[#70C5D7] to-[#DA3A60] text-transparent bg-clip-text"
+          >
+            Your Teaching Journey Begins Here
+          </motion.h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#005482] to-[#70C5D7] mx-auto rounded-full"></div>
+        </div>
         
         <div className="space-y-32">
           {steps.map((step, index) => (
@@ -159,7 +162,7 @@ const BecomeTeacherGuide = () => {
                   <img
                     src={step.image}
                     alt={step.title}
-                    className="relative rounded-lg shadow-2xl w-full transform group-hover:scale-[1.02] transition duration-500"
+                    className="relative rounded-lg shadow-2xl w-full h-[300px] object-cover transform group-hover:scale-[1.02] transition duration-500"
                   />
                 </div>
               </div>
@@ -176,7 +179,17 @@ const BecomeTeacherGuide = () => {
         className="bg-white py-24 px-6"
       >
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-20">Benefits of Teaching With Us</h2>
+          <div className="text-center mb-20">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-[#005482] via-[#70C5D7] to-[#DA3A60] text-transparent bg-clip-text"
+            >
+              Benefits of Teaching With Us
+            </motion.h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-[#005482] to-[#70C5D7] mx-auto rounded-full"></div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {benefits.map((benefit, index) => (
               <motion.div

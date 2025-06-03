@@ -1,5 +1,8 @@
 import React, { createContext, useState, useContext } from 'react';
 
+// Create the context first
+const LanguageContext = createContext(null);
+
 // Define available languages
 const languages = {
   en: {
@@ -9,7 +12,7 @@ const languages = {
       // Navigation & Common
       home: 'Home',
       about: 'About Us',
-      blog: 'Blog',
+      blog: 'Blogs',
       dashboard: 'Dashboard',
       login: 'Login',
       signup: 'Sign Up',
@@ -17,6 +20,7 @@ const languages = {
       findTeacher: 'Find a Teacher Guide',
       becomeTeacher: 'Become a Teacher Guide',
       logout: 'Logout',
+      contact: 'Contact',
       
       // Auth Forms
       welcomeBack: 'Welcome Back!',
@@ -41,7 +45,7 @@ const languages = {
       teacherGuide: 'Teacher Guide',
       studentGuide: 'Student Guide',
       connectingStudents: 'Connecting students with professional teachers across Haiti since 2023',
-      allRightsReserved: '© 2025 LessonPaw. All rights reserved.',
+      allRightsReserved: '© 2025 LesonPaw. All rights reserved.',
       privacyPolicy: 'Privacy Policy',
       termsOfService: 'Terms of Service',
       cookies: 'Cookies',
@@ -49,7 +53,7 @@ const languages = {
       // Home Page
       transformingEducation: 'Transforming Education',
       inHaiti: 'in Haiti',
-      buildingBridges: 'Building bridges between ambitious students and expert educators for a brighter future',
+      buildingBridges: "Unlock your potential with expert educators who inspire. Join thousands of successful students on Haiti's premier learning platform. Your journey to excellence starts here!",
       getStarted: 'Get Started Now',
       
       // About Page
@@ -141,7 +145,346 @@ const languages = {
       successStories: 'Our Success Stories',
       successStoriesDesc: 'Discover how our platform has transformed learning experiences and helped students achieve their goals',
       viewAllStories: 'View All Success Stories',
-      noStories: 'No success stories to display yet.'
+      noStories: 'No success stories to display yet.',
+      
+      // Support Section
+      support: 'Support',
+      supportDesc: 'Need help? Our support team is here for you',
+      contactSupport: 'Contact Support',
+      supportEmail: 'Email Support',
+      supportPhone: 'Phone Support',
+      supportChat: 'Live Chat',
+      supportHours: 'Support Hours',
+      supportAvailability: 'Support Available 24/7',
+      supportResponse: 'Typical response time: 2 hours',
+      supportTicket: 'Create Support Ticket',
+      supportFAQ: 'FAQ',
+      supportHelp: 'Need Support?',
+      supportTeam: 'We are here to Help',
+      
+      // Message Component
+      pleaseEnterMessage: 'Please enter a message',
+      sent: 'Sent',
+      messageSent: 'Message sent',
+      error: 'Error',
+      failedToSendMessage: 'Failed to send message',
+      quickResponse: 'Quick Response',
+      writeMessage: 'Write your message here...',
+      sendMessage: 'Send Message',
+      signInToMessage: 'Sign in to Send a Message',
+      pleaseLoginMessage: 'Please log in to your account to send us a message.',
+      
+      // What is LesonPaw Section
+      whatIsLesonPaw: 'What is',
+      connectingStudents: 'Connecting students with professional teachers across Haiti since 2024',
+      qualityEducation: 'Quality Education',
+      qualityEducationDesc: 'We provide access to high-quality education through our network of verified professional teachers.',
+      connecting: 'Building Connections',
+      connectingDesc: 'Creating meaningful connections between students and teachers to foster a collaborative learning environment.',
+      innovation: 'Innovative Learning',
+      innovationDesc: 'Leveraging technology to make education more accessible and engaging for everyone.',
+      lesonPawMission: 'Our mission is to transform education in Haiti by making quality learning accessible to all students through our innovative platform.',
+
+      // Contact Page
+      getInTouch: 'Get in Touch with',
+      contactSubtitle: "We're here to help! Send us a message and we'll respond within 24 business hours.",
+      fullName: 'Full Name',
+      nameRequired: 'Name is required',
+      emailRequired: 'Email is required',
+      invalidEmail: 'Invalid email address',
+      phone: 'Phone Number',
+      optional: 'Optional',
+      subject: 'Subject',
+      subjectRequired: 'Subject is required',
+      message: 'Message',
+      messageRequired: 'Message is required',
+      messageMinLength: 'Message must be at least 20 characters',
+      attachments: 'Attachments',
+      fileUploadInfo: 'Max file size: 5MB. Supported formats: PDF, DOC, DOCX, JPG, PNG',
+      verifyCaptcha: 'Verify Captcha',
+      enterCaptcha: 'Enter captcha text',
+      captchaValidated: 'Captcha Validated!',
+      captchaRequired: 'Captcha Required',
+      pleaseVerifyCaptcha: 'Please verify the captcha before submitting',
+      sending: 'Sending...',
+      responseTime: 'We will get back to you within 24 business hours.',
+      submissionFailed: 'Submission Failed',
+      tryAlternativeContact: 'Please try again later or use alternative contact methods.',
+      businessHours: 'Business Hours',
+      mondayFriday: 'Monday - Friday',
+      saturday: 'Saturday',
+      sunday: 'Sunday',
+      closed: 'Closed',
+      timeZone: 'All times are in Eastern Time (ET)',
+      contactInfo: 'Contact Information',
+      address: 'Address',
+      connectWithUs: 'Connect With Us',
+      ourLocation: 'Our Location',
+      getDirections: 'Get Directions',
+
+      // Dashboard Menu
+      manageProfile: 'Manage Profile',
+      myBookings: 'My Bookings',
+      joinAsTeacher: 'Join as Teacher',
+      postJob: 'Post Job',
+      availableJobs: 'Available Jobs',
+      manageServices: 'Manage Services',
+      manageUsers: 'Manage Users',
+      allTutors: 'All Tutors',
+      showMessages: 'Show Messages',
+      addTutor: 'Add Tutor',
+      applications: 'Applications',
+      payments: 'Payments',
+      analytics: 'Analytics',
+      students: 'Students',
+      allJobs: 'All Jobs',
+      allServices: 'All Services',
+      story: 'Story',
+      manageStory: 'Manage Story',
+      addBlog: 'Add Blog',
+      editBlog: 'Edit Blog',
+      menu: 'Menu'
+    }
+  },
+  es: {
+    name: 'Español',
+    flag: '🇪🇸',
+    translations: {
+      // Navigation & Common
+      home: 'Inicio',
+      about: 'Sobre Nosotros',
+      blog: 'Blogs',
+      dashboard: 'Panel de Control',
+      login: 'Iniciar Sesión',
+      signup: 'Registrarse',
+      resources: 'Recursos',
+      findTeacher: 'Encontrar Profesor',
+      becomeTeacher: 'Conviértete en Profesor',
+      logout: 'Cerrar Sesión',
+      contact: 'Contacto',
+      
+      // Auth Forms
+      welcomeBack: '¡Bienvenido de Nuevo!',
+      continueJourney: 'Inicia sesión para continuar tu viaje de aprendizaje con LesonPaw',
+      email: 'Correo Electrónico',
+      password: 'Contraseña',
+      forgotPassword: '¿Olvidaste tu contraseña?',
+      enterEmail: 'Ingresa tu correo electrónico',
+      enterPassword: 'Ingresa tu contraseña',
+      validate: 'Validar',
+      captchaText: 'Ingresa el texto del captcha',
+      newToSite: '¿Nuevo en LesonPaw?',
+      createAccount: 'Crear una cuenta',
+      successLogin: '¡Inicio de sesión exitoso!',
+      failedLogin: 'Error al iniciar sesión',
+      tryAgain: 'Intentar de nuevo',
+      
+      // Footer
+      quickLinks: 'Enlaces Rápidos',
+      subjects: 'Materias',
+      contactUs: 'Contáctanos',
+      teacherGuide: 'Guía del Profesor',
+      studentGuide: 'Guía del Estudiante',
+      connectingStudents: 'Conectando estudiantes con profesores profesionales en Haití desde 2023',
+      allRightsReserved: '© 2025 LesonPaw. Todos los derechos reservados.',
+      privacyPolicy: 'Política de Privacidad',
+      termsOfService: 'Términos de Servicio',
+      cookies: 'Cookies',
+      
+      // Home Page
+      transformingEducation: 'Transformando la Educación',
+      inHaiti: 'en Haití',
+      buildingBridges: '¡Desbloquea tu potencial con educadores expertos que inspiran. Únete a miles de estudiantes exitosos en la principal plataforma de aprendizaje de Haití. Tu camino hacia la excelencia comienza aquí!',
+      getStarted: 'Comenzar Ahora',
+      
+      // About Page
+      ourPurpose: 'Nuestro Propósito',
+      empoweringEducation: 'Empoderando la educación a través de la innovación y la accesibilidad',
+      forStudents: 'Para Estudiantes',
+      forTutors: 'Para Profesores',
+      accessToTutors: 'Acceso a tutores calificados en múltiples materias',
+      flexibleScheduling: 'Programación flexible según tus necesidades',
+      personalizedLearning: 'Experiencia de aprendizaje personalizada',
+      progressTracking: 'Seguimiento de progreso y análisis de rendimiento',
+      buildProfile: 'Construye tu perfil y reputación como profesor',
+      setSchedule: 'Establece tu propio horario y tarifas',
+      teachingResources: 'Acceso a recursos y materiales de enseñanza',
+      securePayment: 'Procesamiento seguro de pagos',
+      
+      // Trust & Security
+      trustAndSecurity: 'Confianza y Seguridad',
+      yourSafety: 'Tu seguridad y éxito son nuestras principales prioridades',
+      verifiedTutors: 'Tutores Verificados',
+      support247: 'Soporte 24/7',
+      satisfactionGuarantee: 'Garantía de Satisfacción',
+      tutorsVerified: 'Todos nuestros tutores pasan por verificaciones exhaustivas',
+      supportAvailable: 'Nuestro equipo de soporte está siempre disponible para ayudarte',
+      qualityEducation: 'Garantizamos educación de calidad y satisfacción del estudiante',
+      
+      // Subjects
+      mathematics: 'Matemáticas',
+      sciences: 'Ciencias',
+      languages: 'Idiomas',
+      history: 'Historia',
+      computerScience: 'Informática',
+      artsMusic: 'Arte y Música',
+      
+      // Stats
+      studentsHelped: 'Estudiantes Ayudados',
+      successfulLearners: 'Aprendices que lograron sus objetivos',
+      expertTutors: 'Profesores Expertos',
+      qualifiedEducators: 'Educadores Calificados Listos para Ayudar',
+      subjectsCovered: 'Materias Cubiertas',
+      diverseTopics: 'Amplia Gama de Temas Académicos',
+      successRate: 'Tasa de Éxito',
+      satisfactionRate: 'Tasa de Satisfacción del Estudiante',
+      
+      // Values
+      ourValues: 'Valores Fundamentales Nuestros',
+      principlesGuide: 'Principios que Guían Nuestra Misión para Transformar la Educación',
+      integrity: 'Integridad',
+      integrityDesc: 'Mantenemos los más altos Estándares de Conducta Profesional',
+      innovation: 'Innovación',
+      innovationDesc: 'Mejora Continua de Nuestra Plataforma y Métodos',
+      growth: 'Crecimiento',
+      growthDesc: 'Fomentar el Aprendizaje y Desarrollo Continuo',
+      excellence: 'Excelencia',
+      excellenceDesc: 'Buscar la Excelencia en Todo lo Que Hacemos',
+      
+      // Call to Action
+      readyToTransform: '¿Listo para Transformar Tu Viaje de Aprendizaje?',
+      joinThousands: 'Únete a miles de estudiantes y tutores que ya forman parte de nuestra comunidad en crecimiento',
+
+      // How It Works Section
+      howItWorks: '¿Cómo Funciona?',
+      searchTeacher: 'Buscar',
+      searchTeacherDesc: 'Encuentra el profesor ideal según sus necesidades y ubicación en Haití.',
+      connect: 'Conectarse',
+      connectDesc: 'Planifique las lecciones según su disponibilité.',
+      learn: 'Aprender',
+      learnDesc: 'Reciba instrucción personalizada y logre sus objetivos.',
+      platformDesc: 'Nuestra plataforma facilita la conexión entre estudiantes y profesores calificados en Haití',
+      readyToStart: '¿Listo para comenzar su viaje de aprendizaje o ofrecer sus servicios de enseñanza?',
+      
+      // Why Choose Us Section
+      whyChooseUs: '¿Por Qué Elegir LessonPaw?',
+      committedToEducation: 'Nos comprometemos a hacer la educación de calidad accesible a través de Haití',
+      verifiedTeachers: 'Profesores Verificados',
+      verifiedTeachersDesc: 'Todos nuestros profesores están verificados para su calificación y expertise.',
+      studentCount: '5,000+ Estudiantes',
+      studentCountDesc: 'Únete a miles de estudiantes que ya encontraron su profesor ideal.',
+      qualityGuarantee: 'Garantía de Calidad',
+      qualityGuaranteeDesc: 'Nos comprometemos a ofrecer enseñanza de calidad o proponer una sustitución sin cargo.',
+      safePayments: 'Pagos Seguros',
+      safePaymentsDesc: 'Opciones de pago seguro que incluyen el dinero móvil popular en Haití.',
+      
+      // Teacher Section
+      meetExperts: 'Conoce a Nuestros Profesores Expertos',
+      teacherDesc: 'Aprenda con educadores experimentados apasionados por ayudar a los estudiantes a lograr',
+      
+      // Success Stories Section
+      successStories: 'Nuestras Historias de Éxito',
+      successStoriesDesc: 'Descubre cómo nuestra plataforma ha transformado experiencias de aprendizaje y ayudado a estudiantes a alcanzar sus metas',
+      viewAllStories: 'Ver Todas las Historias',
+      noStories: 'No hay historias de éxito para mostrar por el momento.',
+      
+      // Support Section
+      support: 'Soporte',
+      supportDesc: '¿Necesitas ayuda? Nuestro equipo de soporte está aquí para ti',
+      contactSupport: 'Contactar Soporte',
+      supportEmail: 'Soporte por Email',
+      supportPhone: 'Soporte Telefónico',
+      supportChat: 'Chat en Vivo',
+      supportHours: 'Horario de Soporte',
+      supportAvailability: 'Soporte Disponible 24/7',
+      supportResponse: 'Tiempo de respuesta típico: 2 horas',
+      supportTicket: 'Crear Ticket de Soporte',
+      supportFAQ: 'Preguntas Frecuentes',
+      supportHelp: '¿Cómo podemos ayudarte?',
+      supportTeam: 'Nuestro Equipo de Soporte',
+      
+      // Message Component
+      pleaseEnterMessage: 'Por favor, ingrese un mensaje',
+      sent: 'Enviado',
+      messageSent: 'Mensaje enviado',
+      error: 'Error',
+      failedToSendMessage: 'Error al enviar el mensaje',
+      quickResponse: 'Respuesta Rápida',
+      writeMessage: 'Escribe tu mensaje aquí...',
+      sendMessage: 'Enviar Mensaje',
+      signInToMessage: 'Inicia sesión para enviar un mensaje',
+      pleaseLoginMessage: 'Por favor, inicia sesión en tu cuenta para enviarnos un mensaje.',
+      
+      // What is LesonPaw Section
+      whatIsLesonPaw: '¿Qué es',
+      connectingStudents: 'Conectando estudiantes con profesores profesionales en Haití desde 2024',
+      qualityEducation: 'Educación de Calidad',
+      qualityEducationDesc: 'Proporcionamos acceso a educación de alta calidad a través de nuestra red de profesores profesionales verificados.',
+      connecting: 'Construyendo Conexiones',
+      connectingDesc: 'Creando conexiones significativas entre estudiantes y profesores para fomentar un ambiente de aprendizaje colaborativo.',
+      innovation: 'Aprendizaje Innovador',
+      innovationDesc: 'Aprovechando la tecnología para hacer la educación más accesible y atractiva para todos.',
+      lesonPawMission: 'Nuestra misión es transformar la educación en Haití haciendo que el aprendizaje de calidad sea accesible para todos los estudiantes a través de nuestra plataforma innovadora.',
+
+      // Contact Page
+      getInTouch: 'Contacta con',
+      contactSubtitle: '¡Estamos aquí para ayudar! Envíanos un mensaje y responderemos dentro de las 24 horas hábiles.',
+      fullName: 'Nombre Completo',
+      nameRequired: 'El nombre es requerido',
+      emailRequired: 'El correo electrónico es requerido',
+      invalidEmail: 'Dirección de correo electrónico inválida',
+      phone: 'Número de Teléfono',
+      optional: 'Opcional',
+      subject: 'Asunto',
+      subjectRequired: 'El asunto es requerido',
+      message: 'Mensaje',
+      messageRequired: 'El mensaje es requerido',
+      messageMinLength: 'El mensaje debe tener al menos 20 caracteres',
+      attachments: 'Archivos Adjuntos',
+      fileUploadInfo: 'Tamaño máximo: 5MB. Formatos soportados: PDF, DOC, DOCX, JPG, PNG',
+      verifyCaptcha: 'Verificar Captcha',
+      enterCaptcha: 'Ingrese el texto del captcha',
+      captchaValidated: '¡Captcha Validado!',
+      captchaRequired: 'Captcha Requerido',
+      pleaseVerifyCaptcha: 'Por favor, verifica el captcha antes de enviar',
+      sending: 'Enviando...',
+      responseTime: 'Te responderemos dentro de las 24 horas hábiles.',
+      submissionFailed: 'Error al Enviar',
+      tryAlternativeContact: 'Por favor, intenta más tarde o usa métodos alternativos de contacto.',
+      businessHours: 'Horario de Atención',
+      mondayFriday: 'Lunes - Viernes',
+      saturday: 'Sábado',
+      sunday: 'Domingo',
+      closed: 'Cerrado',
+      timeZone: 'Todos los horarios están en Hora del Este (ET)',
+      contactInfo: 'Información de Contacto',
+      address: 'Dirección',
+      connectWithUs: 'Conéctate con Nosotros',
+      ourLocation: 'Nuestra Ubicación',
+      getDirections: 'Obtenir Direcciones',
+
+      // Dashboard Menu
+      manageProfile: 'Gestionar Perfil',
+      myBookings: 'Mis Reservas',
+      joinAsTeacher: 'Unirse como Profesor',
+      postJob: 'Publicar Trabajo',
+      availableJobs: 'Trabajos Disponibles',
+      manageServices: 'Gestionar Servicios',
+      manageUsers: 'Gestionar Usuarios',
+      allTutors: 'Todos los Tutores',
+      showMessages: 'Mostrar Mensajes',
+      addTutor: 'Añadir Tutor',
+      applications: 'Solicitudes',
+      payments: 'Pagos',
+      analytics: 'Análisis',
+      students: 'Estudiantes',
+      allJobs: 'Todos los Trabajos',
+      allServices: 'Todos los Servicios',
+      story: 'Historia',
+      manageStory: 'Gestionar Historia',
+      addBlog: 'Añadir Blog',
+      editBlog: 'Editar Blog',
+      menu: 'Menú'
     }
   },
   fr: {
@@ -151,7 +494,7 @@ const languages = {
       // Navigation & Common
       home: 'Accueil',
       about: 'À Propos',
-      blog: 'Blog',
+      blog: 'Blogs',
       dashboard: 'Tableau de Bord',
       login: 'Connexion',
       signup: "S'inscrire",
@@ -159,6 +502,7 @@ const languages = {
       findTeacher: 'Trouver un Professeur',
       becomeTeacher: 'Devenir Professeur',
       logout: 'Déconnexion',
+      contact: 'Contact',
       
       // Auth Forms
       welcomeBack: 'Bon Retour!',
@@ -183,7 +527,7 @@ const languages = {
       teacherGuide: 'Guide du Professeur',
       studentGuide: "Guide de l'Étudiant",
       connectingStudents: 'Connecter les étudiants avec des professeurs professionnels à travers Haïti depuis 2023',
-      allRightsReserved: '© 2025 LessonPaw. Tous droits réservés.',
+      allRightsReserved: '© 2025 LesonPaw. Tous droits réservés.',
       privacyPolicy: 'Politique de Confidentialité',
       termsOfService: "Conditions d'Utilisation",
       cookies: 'Cookies',
@@ -191,7 +535,7 @@ const languages = {
       // Home Page
       transformingEducation: "Transformer l'Éducation",
       inHaiti: 'en Haïti',
-      buildingBridges: 'Créer des ponts entre les étudiants ambitieux et les éducateurs experts pour un avenir meilleur',
+      buildingBridges: 'Libérez votre potentiel avec des éducateurs experts qui inspirent. Rejoignez des milliers d\'étudiants qui réussissent sur la première plateforme d\'apprentissage d\'Haïti. Votre chemin vers l\'excellence commence ici !',
       getStarted: 'Commencer Maintenant',
       
       // About Page
@@ -283,11 +627,109 @@ const languages = {
       successStories: 'Nos Histoires de Réussite',
       successStoriesDesc: 'Découvrez comment notre plateforme a transformé les expériences d\'apprentissage et aidé les étudiants à atteindre leurs objectifs',
       viewAllStories: 'Voir Toutes les Histoires',
-      noStories: 'Aucune histoire de réussite à afficher pour le moment.'
+      noStories: 'Aucune histoire de réussite à afficher pour le moment.',
+      
+      // Support Section
+      support: 'Support',
+      supportDesc: 'Besoin d\'aide ? Notre équipe de support est là pour vous',
+      contactSupport: 'Contacter le Support',
+      supportEmail: 'Support par Email',
+      supportPhone: 'Support Téléphonique',
+      supportChat: 'Chat en Direct',
+      supportHours: 'Heures de Support',
+      supportAvailability: 'Support Disponible 24/7',
+      supportResponse: 'Temps de réponse typique : 2 heures',
+      supportTicket: 'Créer un Ticket de Support',
+      supportFAQ: 'FAQ',
+      supportHelp: 'Comment pouvons-nous vous aider ?',
+      supportTeam: 'Notre Équipe de Support',
+      
+      // Message Component
+      pleaseEnterMessage: 'Veuillez entrer un message',
+      sent: 'Envoyé',
+      messageSent: 'Message envoyé',
+      error: 'Erreur',
+      failedToSendMessage: 'Échec de l\'envoi du message',
+      quickResponse: 'Réponse Rapide',
+      writeMessage: 'Écrivez votre message ici...',
+      sendMessage: 'Envoyer le Message',
+      signInToMessage: 'Connectez-vous pour envoyer un message',
+      pleaseLoginMessage: 'Veuillez vous connecter à votre compte pour nous envoyer un message.',
+      
+      // What is LesonPaw Section
+      whatIsLesonPaw: "Qu'est-ce que",
+      connectingStudents: 'Connecter les étudiants avec des professeurs professionnels à travers Haïti depuis 2024',
+      qualityEducation: 'Éducation de Qualité',
+      qualityEducationDesc: 'Nous fournissons un accès à une éducation de haute qualité grâce à notre réseau de professeurs professionnels vérifiés.',
+      connecting: 'Créer des Connexions',
+      connectingDesc: 'Créer des connexions significatives entre les étudiants et les professeurs pour favoriser un environnement d\'apprentissage collaboratif.',
+      innovation: 'Apprentissage Innovant',
+      innovationDesc: 'Utiliser la technologie pour rendre l\'éducation plus accessible et engageante pour tous.',
+      lesonPawMission: 'Notre mission est de transformer l\'éducation en Haïti en rendant l\'apprentissage de qualité accessible à tous les étudiants grâce à notre plateforme innovante.',
+
+      // Contact Page
+      getInTouch: 'Contactez',
+      contactSubtitle: 'Nous sommes là pour vous aider ! Envoyez-nous un message et nous répondrons dans les 24 heures ouvrables.',
+      fullName: 'Nom Complet',
+      nameRequired: 'Le nom est requis',
+      emailRequired: "L'email est requis",
+      invalidEmail: 'Adresse email invalide',
+      phone: 'Numéro de Téléphone',
+      optional: 'Optionnel',
+      subject: 'Sujet',
+      subjectRequired: 'Le sujet est requis',
+      message: 'Message',
+      messageRequired: 'Le message est requis',
+      messageMinLength: 'Le message doit contenir au moins 20 caractères',
+      attachments: 'Pièces Jointes',
+      fileUploadInfo: 'Taille maximale : 5MB. Formats supportés : PDF, DOC, DOCX, JPG, PNG',
+      verifyCaptcha: 'Vérifier le Captcha',
+      enterCaptcha: 'Entrez le texte du captcha',
+      captchaValidated: 'Captcha Validé !',
+      captchaRequired: 'Captcha Requis',
+      pleaseVerifyCaptcha: 'Veuillez vérifier le captcha avant de soumettre',
+      sending: 'Ap voye...',
+      responseTime: 'Nous ap reponn ou nan 24 èdtan.',
+      submissionFailed: 'Echèk nan Voye',
+      tryAlternativeContact: "Veuillez réessayer plus tard ou utiliser d'autres méthodes pour kontakte nou.",
+      businessHours: "Heures d'Ouverture",
+      mondayFriday: 'Lundi - Vendredi',
+      saturday: 'Samedi',
+      sunday: 'Dimanche',
+      closed: 'Fèmen',
+      timeZone: 'Tout lè yo se nan Lè Lès (ET)',
+      contactInfo: 'Enfòmasyon Kontak',
+      address: 'Adrès',
+      connectWithUs: 'Konekte ak Nou',
+      ourLocation: 'Lokalizasyon Nou',
+      getDirections: 'Jwenn Direksyon',
+
+      // Dashboard Menu
+      manageProfile: 'Gérer le Profil',
+      myBookings: 'Mes Réservations',
+      joinAsTeacher: 'Devenir Professeur',
+      postJob: 'Publier une Offre',
+      availableJobs: 'Offres Disponibles',
+      manageServices: 'Gérer les Services',
+      manageUsers: 'Gérer les Utilisateurs',
+      allTutors: 'Tous les Tuteurs',
+      showMessages: 'Afficher les Messages',
+      addTutor: 'Ajouter un Tuteur',
+      applications: 'Candidatures',
+      payments: 'Paiements',
+      analytics: 'Analyses',
+      students: 'Étudiants',
+      allJobs: 'Toutes les Offres',
+      allServices: 'Tous les Services',
+      story: 'Histoire',
+      manageStory: 'Gérer l\'Histoire',
+      addBlog: 'Ajouter un Blog',
+      editBlog: 'Éditer le Blog',
+      menu: 'Menu'
     }
   },
   ht: {
-    name: 'Kreyòl Ayisyen',
+    name: 'Kreyòl',
     flag: '🇭🇹',
     translations: {
       // Navigation & Common
@@ -301,6 +743,7 @@ const languages = {
       findTeacher: 'Jwenn yon Pwofesè',
       becomeTeacher: 'Vin yon Pwofesè',
       logout: 'Dekonekte',
+      contact: 'Kontak',
       
       // Auth Forms
       welcomeBack: 'Byenveni Ankò!',
@@ -325,7 +768,7 @@ const languages = {
       teacherGuide: 'Gid Pwofesè',
       studentGuide: 'Gid Elèv',
       connectingStudents: 'Konekte elèv yo ak pwofesè pwofesyonèl atravè Ayiti depi 2023',
-      allRightsReserved: '© 2025 LessonPaw. Tout dwa rezève.',
+      allRightsReserved: '© 2025 LesonPaw. Tout dwa rezève.',
       privacyPolicy: 'Politik Konfidansyalite',
       termsOfService: 'Kondisyon Sèvis',
       cookies: 'Cookies',
@@ -333,7 +776,7 @@ const languages = {
       // Home Page
       transformingEducation: 'Transfòme Edikasyon',
       inHaiti: 'an Ayiti',
-      buildingBridges: 'Bati pon ant elèv ambisye ak edikatè ekspè pou yon pi bon demen',
+      buildingBridges: 'Debloke potansyèl ou ak pwofesè ekspè ki enspire. Jwenn ak plizyè milye elèv ki gen siksè sou pi bon platfòm aprantisaj Ayiti a. Chemen ou pou ekselans la kòmanse isit la!',
       getStarted: 'Kòmanse Kounye a',
       
       // About Page
@@ -425,26 +868,111 @@ const languages = {
       successStories: 'Istwa Siksè Nou yo',
       successStoriesDesc: 'Dekouvri kijan platfòm nou an transfòme eksperyans aprantisaj epi ede elèv yo atenn objektif yo',
       viewAllStories: 'Gade Tout Istwa yo',
-      noStories: 'Pa gen istwa siksè pou afiche pou kounye a.'
+      noStories: 'Pa gen istwa siksè pou afiche pou kounye a.',
+      
+      // Support Section
+      support: 'Sipò',
+      supportDesc: 'Bezwen èd? Ekip sipò nou an la pou ou',
+      contactSupport: 'Kontakte Sipò',
+      supportEmail: 'Sipò pa Imèl',
+      supportPhone: 'Sipò pa Telefòn',
+      supportChat: 'Chat an Dirèk',
+      supportHours: 'Orè Sipò',
+      supportAvailability: 'Sipò Disponib 24/7',
+      supportResponse: 'Tan repons tipik: 2 èdtan',
+      supportTicket: 'Kreye Tikè Sipò',
+      supportFAQ: 'FAQ',
+      supportHelp: 'Need Support?',
+      supportTeam: 'We are here to Help',
+      
+      // Message Component
+      pleaseEnterMessage: 'Tanpri antre yon mesaj',
+      sent: 'Voye',
+      messageSent: 'Mesaj voye',
+      error: 'Erè',
+      failedToSendMessage: 'Echèk pou voye mesaj la',
+      quickResponse: 'Repons Rapid',
+      writeMessage: 'Ekri mesaj ou a isit la...',
+      sendMessage: 'Voye Mesaj',
+      signInToMessage: 'Konekte pou voye yon mesaj',
+      pleaseLoginMessage: 'Tanpri konekte nan kont ou pou voye nou yon mesaj.',
+      
+      // What is LesonPaw Section
+      whatIsLesonPaw: 'Kisa',
+      connectingStudents: 'Konekte elèv yo ak pwofesè pwofesyonèl atravè Ayiti depi 2024',
+      qualityEducation: 'Edikasyon Kalite',
+      qualityEducationDesc: 'Nou bay aksè a edikasyon kalite siperyè atravè rezo pwofesè pwofesyonèl verifye nou yo.',
+      connecting: 'Bati Koneksyon',
+      connectingDesc: 'Kreye koneksyon ki gen sans ant elèv ak pwofesè yo pou ankouraje yon anviwònman aprantisaj kolaboratif.',
+      innovation: 'Aprantisaj Inovatif',
+      innovationDesc: 'Itilize teknoloji pou rann edikasyon pi aksesib ak pi angajan pou tout moun.',
+      lesonPawMission: 'Misyon nou se transfòme edikasyon an Ayiti lè nou rann aprantisaj kalite aksesib pou tout elèv atravè platfòm inovatif nou an.',
+
+      // Contact Page
+      getInTouch: 'Kontakte',
+      contactSubtitle: 'Nou la pou ede w! Voye nou yon mesaj epi nou ap reponn nan 24 èdtan.',
+      fullName: 'Non Konplè',
+      nameRequired: 'Non an obligatwa',
+      emailRequired: 'Imèl la obligatwa',
+      invalidEmail: 'Adrès imèl la pa valid',
+      phone: 'Nimewo Telefòn',
+      optional: 'Opsyonèl',
+      subject: 'Sijè',
+      subjectRequired: 'Sijè a obligatwa',
+      message: 'Mesaj',
+      messageRequired: 'Mesaj la obligatwa',
+      messageMinLength: 'Mesaj la dwe gen omwen 20 karaktè',
+      attachments: 'Dokiman',
+      fileUploadInfo: 'Gwosè maksimòm: 5MB. Fòma ki aksepte: PDF, DOC, DOCX, JPG, PNG',
+      verifyCaptcha: 'Verifye Captcha',
+      enterCaptcha: 'Antre tèks captcha a',
+      captchaValidated: 'Captcha Verifye!',
+      captchaRequired: 'Captcha Obligatwa',
+      pleaseVerifyCaptcha: 'Tanpri verifye captcha a anvan ou soumèt',
+      sending: 'Ap voye...',
+      responseTime: 'Nou ap reponn ou nan 24 èdtan.',
+      submissionFailed: 'Echèk nan Voye',
+      tryAlternativeContact: 'Tanpri eseye pita oswa itilize lòt metòd pou kontakte nou.',
+      businessHours: 'Orè Biznis',
+      mondayFriday: 'Lendi - Vandredi',
+      saturday: 'Samdi',
+      sunday: 'Dimanch',
+      closed: 'Fèmen',
+      timeZone: 'Tout lè yo se nan Lè Lès (ET)',
+      contactInfo: 'Enfòmasyon Kontak',
+      address: 'Adrès',
+      connectWithUs: 'Konekte ak Nou',
+      ourLocation: 'Lokalizasyon Nou',
+      getDirections: 'Jwenn Direksyon',
+
+      // Dashboard Menu
+      manageProfile: 'Jere Pwofil',
+      myBookings: 'Rezèvasyon Mwen',
+      joinAsTeacher: 'Vin yon Pwofesè',
+      postJob: 'Poste Travay',
+      availableJobs: 'Travay Disponib',
+      manageServices: 'Jere Sèvis',
+      manageUsers: 'Jere Itilizatè',
+      allTutors: 'Tout Pwofesè',
+      showMessages: 'Montre Mesaj',
+      addTutor: 'Ajoute Pwofesè',
+      applications: 'Aplikasyon',
+      payments: 'Peman',
+      analytics: 'Analiz',
+      students: 'Elèv',
+      allJobs: 'Tout Travay',
+      allServices: 'Tout Sèvis',
+      story: 'Istwa',
+      manageStory: 'Jere Istwa',
+      addBlog: 'Ajoute Blog',
+      editBlog: 'Modifye Blog',
+      menu: 'Meni'
     }
   }
 };
 
-// Move context creation to a separate constant
-const LanguageContext = createContext();
-
-// Export context separately
-export { LanguageContext };
-
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
-
-export const LanguageProvider = ({ children }) => {
+// Language Provider Component
+function LanguageProvider({ children }) {
   const [currentLanguage, setCurrentLanguage] = useState('en');
 
   const translate = (key) => {
@@ -463,6 +991,16 @@ export const LanguageProvider = ({ children }) => {
       {children}
     </LanguageContext.Provider>
   );
-};
+}
 
+// Custom hook for using language context
+function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+}
+
+export { useLanguage };
 export default LanguageProvider; 

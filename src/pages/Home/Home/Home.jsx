@@ -7,11 +7,13 @@ import Message from './Message';
 import ManageStories from '../../Dashboard/ManageStories/ManageStories';
 import HowItWorks from './HowItWorks';
 import WhyChooseUs from './WhyChooseUs';
+import WhatIsLesonPaw from './WhatIsLesonPaw';
 
 const Home = () => {
     return (
         <div className='w-full'>
           <Banner></Banner>
+          <WhatIsLesonPaw></WhatIsLesonPaw>
           <HowItWorks></HowItWorks>
           <div className="w-full px-4">
             <Teacher></Teacher>

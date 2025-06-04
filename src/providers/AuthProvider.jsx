@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, sendEmailVerification } from 'firebase/auth';
 import { app } from '../firebase/firebase.config';
 import useAxiosPublic from '../hooks/UseAxiosPublic';
 
@@ -13,9 +13,12 @@ const AuthProvider = ({ children }) => {
 
     const googleProvider = new GoogleAuthProvider();
     const axiosPublic = useAxiosPublic();
-    const createUser = (email, password) => {
+    const createUser = async (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        // Send verification email
+        await sendEmailVerification(userCredential.user);
+        return userCredential;
     };
     const signIn = (email, password) => {
         setLoading(true);
@@ -39,6 +42,10 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo,
         });
+    };
+
+    const verifyEmail = () => {
+        return sendEmailVerification(auth.currentUser);
     };
 
     // useEffect(() => {
@@ -86,6 +93,7 @@ const AuthProvider = ({ children }) => {
         updateUserProfile,
         googleSignIn,
         resetPassword, 
+        verifyEmail,
     };
 
     return (

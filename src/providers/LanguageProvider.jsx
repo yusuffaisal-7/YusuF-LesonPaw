@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 
-// Create the context first
-const LanguageContext = createContext(null);
+// Create and export the context
+export const LanguageContext = createContext(null);
 
 // Define available languages
 const languages = {
@@ -285,7 +285,7 @@ const languages = {
       contactUs: 'Contáctanos',
       teacherGuide: 'Guía del Profesor',
       studentGuide: 'Guía del Estudiante',
-      connectingStudents: 'Conectando estudiantes con profesores profesionales en Haití desde 2023',
+      connectingStudents: 'Conectando estudiantes con profesores profesionales en Haití desde 2024',
       allRightsReserved: '© 2025 LesonPaw. Todos los derechos reservados.',
       privacyPolicy: 'Política de Privacidad',
       termsOfService: 'Términos de Servicio',
@@ -319,7 +319,8 @@ const languages = {
       satisfactionGuarantee: 'Garantía de Satisfacción',
       tutorsVerified: 'Todos nuestros tutores pasan por verificaciones exhaustivas',
       supportAvailable: 'Nuestro equipo de soporte está siempre disponible para ayudarte',
-      qualityEducation: 'Garantizamos educación de calidad y satisfacción del estudiante',
+      qualityEducation: 'Educación de Calidad',
+      qualityEducationDesc: 'Proporcionamos acceso a educación de alta calidad a través de nuestra red de profesores profesionales verificados.',
       
       // Subjects
       mathematics: 'Matemáticas',
@@ -461,7 +462,7 @@ const languages = {
       address: 'Dirección',
       connectWithUs: 'Conéctate con Nosotros',
       ourLocation: 'Nuestra Ubicación',
-      getDirections: 'Obtenir Direcciones',
+      getDirections: 'Obtenir Direksyon',
 
       // Dashboard Menu
       manageProfile: 'Gestionar Perfil',
@@ -526,7 +527,7 @@ const languages = {
       contactUs: 'Contactez-nous',
       teacherGuide: 'Guide du Professeur',
       studentGuide: "Guide de l'Étudiant",
-      connectingStudents: 'Connecter les étudiants avec des professeurs professionnels à travers Haïti depuis 2023',
+      connectingStudents: 'Connecter les étudiants avec des professeurs professionnels à travers Haïti depuis 2024',
       allRightsReserved: '© 2025 LesonPaw. Tous droits réservés.',
       privacyPolicy: 'Politique de Confidentialité',
       termsOfService: "Conditions d'Utilisation",
@@ -725,7 +726,7 @@ const languages = {
       manageStory: 'Gérer l\'Histoire',
       addBlog: 'Ajouter un Blog',
       editBlog: 'Éditer le Blog',
-      menu: 'Menu'
+      menu: 'Meni'
     }
   },
   ht: {
@@ -972,7 +973,7 @@ const languages = {
 };
 
 // Language Provider Component
-function LanguageProvider({ children }) {
+const LanguageProvider = ({ children }) => {
   const [currentLanguage, setCurrentLanguage] = useState('en');
 
   const translate = (key) => {
@@ -991,16 +992,15 @@ function LanguageProvider({ children }) {
       {children}
     </LanguageContext.Provider>
   );
-}
+};
 
 // Custom hook for using language context
-function useLanguage() {
+export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
-}
+};
 
-export { useLanguage };
 export default LanguageProvider; 

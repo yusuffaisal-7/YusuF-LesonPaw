@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaGraduationCap, FaUsers, FaChalkboardTeacher, FaGlobe, FaLinkedin, 
   FaTwitter, FaEnvelope, FaCheckCircle, FaStar, FaClock, FaShieldAlt, 
   FaHandshake, FaLightbulb, FaChartLine, FaAward } from 'react-icons/fa';
@@ -496,12 +497,12 @@ const AboutUs = () => {
               {translate('joinThousands')}
             </p>
             <div className="flex justify-center">
-              <a
-                href="/register"
+              <Link
+                to="/signup"
                 className="inline-block bg-[#DA3A60] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-medium hover:bg-[#DA3A60]/90 transition-colors text-base sm:text-lg"
               >
                 {translate('getStarted')}
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>

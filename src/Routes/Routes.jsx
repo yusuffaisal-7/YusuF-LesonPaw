@@ -46,6 +46,7 @@ import AllBlog from "../pages/Dashboard/AllBlog/AllBlog";
 import FindTeacherGuide from "../pages/FindTeacherGuide/FindTeacherGuide";
 import BecomeTeacherGuide from "../pages/BecomeTeacherGuide/BecomeTeacherGuide";
 import Contact from "../pages/Contact";
+import NotFound from "../pages/NotFound/NotFound";
 
 // Custom wrapper to restrict routes to admins
 const AdminRoute = ({ children }) => {
@@ -291,6 +292,11 @@ export const router = createBrowserRouter([
         path: "tutors/:email",
         element: <TutorProfile />,
       },
+      // Add 404 route for unmatched paths
+    {
+    path: "*",
+    element: <NotFound />,
+  }
     ],
   },
 ]);

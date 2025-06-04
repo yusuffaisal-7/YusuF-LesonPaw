@@ -2,35 +2,42 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaSearch, FaUserCheck, FaCalendarCheck, FaComments, FaStar, FaGraduationCap, FaChalkboardTeacher, FaLaptop, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../providers/LanguageProvider';
+import img1 from "../../assets/searchi.jpg";
+import img2 from "../../assets/IMG_41.jpg";
+import img3 from "../../assets/IMG_15.jpg";
+import img4 from "../../assets/IMG_50.jpg";
 
 const FindTeacherGuide = () => {
+  const { translate } = useLanguage();
+
   const steps = [
     {
       icon: <FaSearch className="text-4xl text-[#DA3A60]" />,
-      title: "Smart Search",
-      description: "Our intelligent matching system helps you find the perfect teacher based on your learning goals, preferred subjects, and schedule.",
-      image: "https://i.ibb.co/Kj3Kv8P/search-teacher.png",
+      title: translate('smartSearch'),
+      description: translate('smartSearchDesc'),
+      image: img1,
       animation: { x: [-100, 0], opacity: [0, 1] }
     },
     {
       icon: <FaUserCheck className="text-4xl text-[#70C5D7]" />,
-      title: "Expert Verification",
-      description: "Every teacher undergoes a rigorous verification process. View detailed profiles with verified credentials, experience, and student reviews.",
-      image: "https://i.ibb.co/0M3jqFj/review-profile.png",
+      title: translate('expertVerification'),
+      description: translate('expertVerificationDesc'),
+      image: img2,
       animation: { y: [100, 0], opacity: [0, 1] }
     },
     {
       icon: <FaCalendarCheck className="text-4xl text-[#FCBB45]" />,
-      title: "Flexible Learning",
-      description: "Choose between online or in-person sessions. Schedule lessons that fit your lifestyle with our easy-to-use booking system.",
-      image: "https://i.ibb.co/XS8DpXR/schedule.png",
+      title: translate('flexibleLearning'),
+      description: translate('flexibleLearningDesc'),
+      image: img3,
       animation: { x: [100, 0], opacity: [0, 1] }
     },
     {
       icon: <FaComments className="text-4xl text-[#DA3A60]" />,
-      title: "Personalized Experience",
-      description: "Enjoy customized learning plans, progress tracking, and continuous support throughout your educational journey.",
-      image: "https://i.ibb.co/Kj8Tbzs/start-learning.png",
+      title: translate('personalizedExperience'),
+      description: translate('personalizedExperienceDesc'),
+      image: img4,
       animation: { y: [-100, 0], opacity: [0, 1] }
     }
   ];
@@ -38,18 +45,18 @@ const FindTeacherGuide = () => {
   const features = [
     {
       icon: <FaChalkboardTeacher className="text-[#DA3A60]" />,
-      title: "Expert Teachers",
-      description: "Learn from certified professionals with proven track records"
+      title: translate('expertTeachers'),
+      description: translate('expertTeachersDesc')
     },
     {
       icon: <FaLaptop className="text-[#70C5D7]" />,
-      title: "Modern Learning Tools",
-      description: "Access cutting-edge educational resources and technology"
+      title: translate('modernLearningTools'),
+      description: translate('modernLearningToolsDesc')
     },
     {
       icon: <FaUsers className="text-[#FCBB45]" />,
-      title: "Community Support",
-      description: "Join a vibrant learning community of students and educators"
+      title: translate('communitySupport'),
+      description: translate('communitySupportDesc')
     }
   ];
 
@@ -77,10 +84,10 @@ const FindTeacherGuide = () => {
               className="mb-12"
             >
               <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-[#005482] via-[#70C5D7] to-[#DA3A60] text-transparent bg-clip-text">
-                Find Your Perfect Teacher
+                {translate('findPerfectTeacher')}
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Discover expert educators who will guide you towards academic excellence and personal growth
+                {translate('findTeacherDesc')}
               </p>
             </motion.div>
 
@@ -93,15 +100,15 @@ const FindTeacherGuide = () => {
             >
               <div className="p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow">
                 <div className="text-4xl font-bold text-[#DA3A60] mb-2">500+</div>
-                <div className="text-gray-600">Verified Teachers</div>
+                <div className="text-gray-600">{translate('verifiedTeachers')}</div>
               </div>
               <div className="p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow">
                 <div className="text-4xl font-bold text-[#70C5D7] mb-2">50+</div>
-                <div className="text-gray-600">Subjects Offered</div>
+                <div className="text-gray-600">{translate('subjectsOffered')}</div>
               </div>
               <div className="p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow">
                 <div className="text-4xl font-bold text-[#FCBB45] mb-2">98%</div>
-                <div className="text-gray-600">Student Satisfaction</div>
+                <div className="text-gray-600">{translate('studentSatisfaction')}</div>
               </div>
             </motion.div>
           </div>
@@ -116,7 +123,7 @@ const FindTeacherGuide = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold text-center mb-20 bg-gradient-to-r from-[#005482] to-[#70C5D7] text-transparent bg-clip-text"
         >
-          Your Learning Journey Starts Here
+          {translate('learningJourneyStart')}
         </motion.h2>
         
         <div className="space-y-32">
@@ -160,7 +167,7 @@ const FindTeacherGuide = () => {
         className="bg-white py-24 px-6"
       >
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-20">Why Students Choose Us</h2>
+          <h2 className="text-4xl font-bold text-center mb-20">{translate('whyStudentsChooseUs')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {features.map((feature, index) => (
               <motion.div
@@ -192,23 +199,23 @@ const FindTeacherGuide = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#005482] to-[#70C5D7]"></div>
         <div className="relative max-w-4xl mx-auto text-center py-24 px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-            Ready to Transform Your Learning Experience?
+            {translate('readyToTransform')}
           </h2>
           <p className="text-xl text-white/90 mb-12 leading-relaxed">
-            Join thousands of students who have found their perfect learning match and achieved their academic goals
+            {translate('joinThousands')}
           </p>
           <div className="flex flex-col md:flex-row gap-6 justify-center">
             <Link 
               to="/signup"
               className="px-8 py-4 bg-[#DA3A60] text-white rounded-full text-lg font-semibold hover:bg-[#c43255] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              Start Learning Today
+              {translate('startLearningToday')}
             </Link>
             <Link 
               to="/about"
               className="px-8 py-4 bg-white text-[#005482] rounded-full text-lg font-semibold hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              Learn More About Us
+              {translate('learnMoreAboutUs')}
             </Link>
           </div>
         </div>

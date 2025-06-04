@@ -6,6 +6,9 @@ import { FaGraduationCap, FaUsers, FaChalkboardTeacher, FaGlobe, FaLinkedin,
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
 import { useLanguage } from '../../providers/LanguageProvider';
+import imge1 from '../../assets/IMG_9.jpg';
+import imge2 from '../../assets/IMG_40.jpg';
+import imge3 from '../../assets/IMG_7.jpg';
 
 const SectionHeader = ({ title, subtitle, isDark = false }) => {
   const { translate } = useLanguage();
@@ -79,10 +82,10 @@ const AboutUs = () => {
   ];
 
   const milestones = [
-    { year: '2023', title: 'Platform Launch', description: 'LessonPaw was founded with a vision to transform education in Haiti' },
-    { year: '2023', title: 'First 1000 Students', description: 'Reached our first milestone of helping 1000 students' },
-    { year: '2024', title: 'Mobile App Launch', description: 'Expanded our reach with a dedicated mobile application' },
-    { year: '2024', title: 'National Recognition', description: 'Recognized as leading educational platform in Haiti' }
+    { year: '2023', title: 'Idea Launch', description: 'LesonPaw was founded with a vision to transform education in Haiti' },
+    { year: '2024', title: 'First Prototype Launch', description: 'Reached our first milestone of helping students' },
+    { year: '2024', title: 'Web Application Launch', description: 'Expanded our reach with a dedicated Web application' },
+    { year: '2025', title: 'National Recognition', description: 'Recognized as leading educational platform in Haiti' }
   ];
 
   const teamMembers = [
@@ -243,21 +246,21 @@ const AboutUs = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center lg:px-8">
                   <img 
-                    src="https://example.com/student-image.jpg" 
+                    src={imge1} 
                     alt="Student Learning"
-                    className="rounded-2xl shadow-xl max-w-full sm:max-w-md w-full h-auto"
+                    className="rounded-2xl shadow-xl w-full h-[500px] object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               </>
             ) : (
               <>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center lg:px-8">
                   <img 
-                    src="https://example.com/tutor-image.jpg" 
+                    src={imge2} 
                     alt="Tutor Teaching"
-                    className="rounded-2xl shadow-xl max-w-full sm:max-w-md w-full h-auto"
+                    className="rounded-2xl shadow-xl w-full h-[500px] object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="bg-gradient-to-br from-[#005482] to-[#70C5D7] rounded-2xl p-6 sm:p-8">
@@ -471,7 +474,7 @@ const AboutUs = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-[#005482] to-[#70C5D7] rounded-xl transform rotate-3"></div>
               <img
-                src="https://example.com/security-image.jpg"
+                src={imge3}
                 alt="Trust & Security"
                 className="relative rounded-xl shadow-xl w-full"
               />

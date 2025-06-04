@@ -27,7 +27,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { useLanguage } from '../../../providers/LanguageProvider';
-import img2 from "../../../assets/img-02.png";
+import img2 from "../../../assets/banner-PhotoRoom.jpg";
 
 const Banner = () => {
   const { user } = useContext(AuthContext);
@@ -103,11 +103,11 @@ const Banner = () => {
               </button>
             </div>
           </div>
-          <div className="w-full md:w-1/2 mt-8 md:mt-0">
+          <div className="w-full md:w-1/2 mt-8 md:mt-0 flex items-center justify-center">
             <img 
               src={img2} 
               alt="Education Illustration" 
-              className="w-full h-auto max-w-2xl mx-auto"
+              className="w-full h-auto max-w-4xl mx-auto transform scale-125 hover:scale-120 transition-transform duration-300"
             />
           </div>
         </div>

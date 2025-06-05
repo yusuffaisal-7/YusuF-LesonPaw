@@ -1314,7 +1314,7 @@ const languages = {
 
 // Language Provider Component
 const LanguageProvider = ({ children }) => {
-  const [currentLanguage, setCurrentLanguage] = useState('en');
+  const [currentLanguage, setCurrentLanguage] = useState('fr');
 
   const translate = (key) => {
     return languages[currentLanguage]?.translations[key] || languages.en.translations[key] || key;

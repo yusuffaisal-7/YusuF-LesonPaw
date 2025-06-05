@@ -193,8 +193,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 mb-1">Email</p>
-                      <a href="mailto:support@lessonpaw.com" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
-                        support@lessonpaw.com
+                      <a href="mailto:info@jobpaw.com" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
+                        info@jobpaw.com
                       </a>
                     </div>
                   </div>
@@ -206,8 +206,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 mb-1">Phone</p>
-                      <a href="tel:(123) 456-7890" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
-                        (123) 456-7890
+                      <a href="tel:+15093701923" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
+                        +1 (509) 3701 9232
                       </a>
                     </div>
                   </div>
@@ -221,9 +221,9 @@ const Contact = () => {
                     <div>
                       <p className="text-sm text-gray-600 mb-1">Address</p>
                       <p className="text-base text-[#005482] font-medium">
-                        45 Boulevard Jean-Jacques Dessalines<br />
-                        Turgeau<br />
-                        Port-au-Prince, Haiti
+                        4, Allées des Acajous<br />
+                        Delmas 95, Petion-Ville<br />
+                        6121, Haiti
                       </p>
                     </div>
                   </div>

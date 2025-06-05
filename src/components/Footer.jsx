@@ -65,15 +65,15 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <FaMapMarkerAlt className="text-[#DA3A60]" />
-                <span>123 Delmas Street, Port-au-Prince, Haiti</span>
+                <span>4, Allées des Acajous, Delmas 95, Petion-Ville 6121, Haiti</span>
               </li>
               <li className="flex items-center gap-3">
                 <FaPhone className="text-[#DA3A60]" />
-                <span>+509 2222-3333</span>
+                <span>+1 (509) 3701 9232</span>
               </li>
               <li className="flex items-center gap-3">
                 <FaEnvelope className="text-[#DA3A60]" />
-                <span>info@lessonpaw.com</span>
+                <span>info@jobpaw.com</span>
               </li>
             </ul>
           </div>

@@ -6,6 +6,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import SocialLogin from "../components/SocialLogin";
 import useAxiosPublic from "../hooks/UseAxiosPublic";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import imge1 from '../assets/img-ln-Photoroom.png';
 
 const SignUp = () => {
     const [disabled, setDisabled] = useState(true);
@@ -148,10 +149,9 @@ const SignUp = () => {
                 <div className="max-w-lg">
                     <h2 className="text-4xl font-bold text-white mb-6">Join <span className="text-[#FCBB45]">LessonPaw</span> Today!</h2>
                     <p className="text-xl text-white/90">Connect with a community of educators and learners. Share knowledge, discover resources, and grow together.</p>
-                    {/* You can add your illustration here */}
                     <div className="mt-8">
                         <img 
-                            src="/path-to-your-illustration.svg" 
+                            src={imge1} 
                             alt="Progress Illustration"
                             className="w-full max-w-md mx-auto"
                         />

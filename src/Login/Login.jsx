@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../providers/AuthProvider';
 import { useLanguage } from '../providers/LanguageProvider';
 import SocialLogin from '../components/SocialLogin';
+import imge1 from '../assets/img-signup-PhotoRoom.png';
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true);
@@ -115,10 +116,9 @@ const Login = () => {
                 <div className="max-w-lg">
                     <h2 className="text-4xl font-bold text-white mb-6">Yes! we're making progress</h2>
                     <p className="text-xl text-white/90">every minute & every second</p>
-                    {/* You can add your illustration here */}
                     <div className="mt-8">
                         <img 
-                            src="/path-to-your-illustration.svg" 
+                            src={imge1} 
                             alt="Progress Illustration"
                             className="w-full max-w-md mx-auto"
                         />

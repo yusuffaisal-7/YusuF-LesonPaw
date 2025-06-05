@@ -21,7 +21,7 @@ const PostJob = () => {
     onSuccess: () => {
       Swal.fire('Success', 'Job posted successfully!', 'success');
       reset();
-      navigate('/services');
+      navigate('/dashboard');
     },
     onError: (error) => {
       if (error.response?.status === 402) {

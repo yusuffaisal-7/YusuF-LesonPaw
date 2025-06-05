@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Intro from "../pages/Dashboard/Intro/Intro";
 import TeacherHome from "../pages/Dashboard/TeacherHome/TeacherHome";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
       },
       {
         path: "blogs",

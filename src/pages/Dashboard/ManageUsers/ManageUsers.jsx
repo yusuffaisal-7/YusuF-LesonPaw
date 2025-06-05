@@ -36,13 +36,30 @@ const ManageUsers = () => {
     },
   });
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredUsers = users
+    .filter(
+      (user) =>
+        (searchQuery === "" ||
+          user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.email?.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        (filterRole === "all" || user.role === filterRole)
+    )
+    .sort((a, b) => {
+      // Always put admins first
+      if (a.role === "admin" && b.role !== "admin") return -1;
+      if (a.role !== "admin" && b.role === "admin") return 1;
+      
+      // Then apply the regular sorting
+      if (sortField === "name") {
+        return sortOrder === "asc"
+          ? (a.name || "").localeCompare(b.name || "")
+          : (b.name || "").localeCompare(a.name || "");
+      }
+      // Add other sort fields if needed
+      return 0;
+    });
 
-  const totalPages = Math.ceil(users.length / usersPerPage);
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
   const paginatedUsers = filteredUsers.slice(
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage

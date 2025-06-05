@@ -7,19 +7,21 @@ import { motion } from 'framer-motion';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Loading from '../../components/Loading/Loading';
 
-const BlogHeader = () => (
+const BlogHeader = ({ searchTerm, setSearchTerm }) => (
   <div className="text-center py-8 sm:py-12 px-4 bg-gradient-to-b from-[#70C5D7]/10 to-transparent">
     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
-      <span className="text-[#005482]">Our</span>
-      <span className="text-[#DA3A60]"> Blogs</span>
+      <span className="text-[#005482]">LessonPaw</span>
+      <span className="text-[#DA3A60]"> Blog</span>
     </h1>
     <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto">
-      LesonPaw e-commerce is a new growing one of the best online shopping in bd. We are proud to achieve more confidence in a very short time. LesonPaw sells a different kind of premium quality and original product such as Men Fashion, Women Fashion, Kids & Mom, Home Decor, Mobile & Computer, Sports & Fitness and many more.
+      Explore educational insights, teaching tips, and learning resources. Stay updated with the latest trends in education and discover effective teaching methodologies from our expert community.
     </p>
     <div className="relative max-w-2xl mx-auto mt-6 sm:mt-8 px-4 sm:px-0">
       <input
         type="text"
-        placeholder="Search blogs Here"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search articles by title, category, or content"
         className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#70C5D7] focus:border-transparent text-sm sm:text-base"
       />
       <button className="absolute right-6 sm:right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#005482] to-[#70C5D7] text-white px-4 sm:px-8 py-2 sm:py-3 rounded-full hover:opacity-90 transition-all">
@@ -169,14 +171,17 @@ const Blog = () => {
     },
   });
 
-  // Get unique categories
-  const categories = [...new Set(blogPosts.map((post) => post.category))].filter(Boolean);
+  // Get unique categories and sort them alphabetically
+  const categories = [...new Set(blogPosts.map((post) => post.category))]
+    .filter(Boolean)
+    .sort((a, b) => a.localeCompare(b));
 
   // Filter posts based on search term and category
   const filteredPosts = blogPosts.filter((post) => {
     const matchesSearch =
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesCategory = activeCategory === 'all' || post.category === activeCategory;
@@ -184,28 +189,26 @@ const Blog = () => {
     return matchesSearch && matchesCategory;
   });
 
-  // Get featured post (most recent)
-  const featuredPost = blogPosts.length > 0 ? blogPosts[0] : null;
+  // Get featured posts (3 most recent)
+  const featuredPosts = blogPosts
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 3);
 
   if (error) {
-    toast.error(error.response?.data?.message || 'Failed to load blogs');
+    toast.error('Failed to load blogs. Please try again later.');
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Error Loading Blogs</h2>
-          <p className="text-gray-600">Please try again later</p>
+          <p className="text-gray-600">Please try refreshing the page</p>
         </div>
       </div>
     );
   }
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#70C5D7]/5 to-gray-50">
-      <BlogHeader />
+      <BlogHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
         <CategoryTabs
@@ -214,13 +217,18 @@ const Blog = () => {
           onCategoryChange={setActiveCategory}
         />
 
+        {/* Featured Posts Section */}
+        {!isLoading && featuredPosts.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {featuredPosts.map((post, index) => (
+              <FeaturedPost key={post._id} post={post} />
+            ))}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            {!isLoading && featuredPost && (
-              <FeaturedPost post={featuredPost} />
-            )}
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {isLoading
                 ? Array(4).fill(0).map((_, index) => (
                     <div key={index} className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 animate-pulse">
@@ -231,13 +239,14 @@ const Blog = () => {
                       </div>
                     </div>
                   ))
-                : filteredPosts.slice(1).map((post, index) => (
+                : filteredPosts.map((post, index) => (
                     <BlogCard key={post._id} post={post} index={index} />
                   ))}
             </div>
 
             {!isLoading && filteredPosts.length === 0 && (
               <div className="text-center py-12 sm:py-16 bg-white rounded-2xl sm:rounded-3xl border border-[#70C5D7]/10">
+                <FaBook className="mx-auto text-4xl text-[#70C5D7] mb-4" />
                 <h3 className="text-xl sm:text-2xl font-semibold text-[#005482] mb-2 sm:mb-3">No Posts Found</h3>
                 <p className="text-sm sm:text-base text-gray-600">Try adjusting your search or category filter</p>
               </div>
@@ -248,15 +257,20 @@ const Blog = () => {
             <RecentPosts posts={blogPosts} />
             
             <div className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-[#70C5D7]/10">
-              <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-[#005482]">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {['Education', 'Technology', 'Learning', 'Teaching', 'Students', 'Tips'].map((tag) => (
-                  <span 
-                    key={tag} 
-                    className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#70C5D7]/10 text-gray-700 rounded-full text-xs sm:text-sm hover:bg-[#005482] hover:text-white transition-colors cursor-pointer"
+              <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-[#005482]">Popular Categories</h3>
+              <div className="space-y-2">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`w-full text-left px-4 py-2 rounded-lg text-sm transition-all ${
+                      activeCategory === category
+                        ? 'bg-[#005482] text-white'
+                        : 'text-gray-700 hover:bg-[#70C5D7]/10'
+                    }`}
                   >
-                    {tag}
-                  </span>
+                    {category}
+                  </button>
                 ))}
               </div>
             </div>

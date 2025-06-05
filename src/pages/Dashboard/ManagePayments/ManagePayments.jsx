@@ -8,8 +8,42 @@ import {
   FaChartLine, 
   FaUserGraduate,
   FaCalendarAlt,
-  FaDollarSign
+  FaDollarSign,
+  FaExclamationTriangle
 } from 'react-icons/fa';
+
+// Error Boundary Component
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-lg p-6 max-w-lg w-full text-center">
+            <FaExclamationTriangle className="text-[#DA3A60] text-4xl mx-auto mb-4" />
+            <h2 className="text-xl font-bold text-[#005482] mb-2">Oops! Something went wrong</h2>
+            <p className="text-gray-600 mb-4">We're having trouble displaying this information.</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-[#005482] text-white px-6 py-2 rounded-lg hover:bg-[#005482]/90 transition-colors"
+            >
+              Refresh Page
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 const ManagePayments = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,12 +59,13 @@ const ManagePayments = () => {
     },
   });
 
-  // Calculate statistics
+  // Calculate statistics with safe number handling
   const stats = {
-    totalAmount: payments.reduce((sum, payment) => sum + payment.price, 0),
-    avgAmount: payments.length ? (payments.reduce((sum, payment) => sum + payment.price, 0) / payments.length) : 0,
+    totalAmount: payments.reduce((sum, payment) => sum + (Number(payment?.price) || 0), 0),
+    avgAmount: payments.length ? 
+      (payments.reduce((sum, payment) => sum + (Number(payment?.price) || 0), 0) / payments.length) : 0,
     totalTransactions: payments.length,
-    uniqueStudents: new Set(payments.map(p => p.email)).size
+    uniqueStudents: new Set(payments.filter(p => p?.email).map(p => p.email)).size
   };
 
   // Filter and sort payments
@@ -38,21 +73,21 @@ const ManagePayments = () => {
     .filter(payment => {
       const searchLower = searchTerm.toLowerCase();
       return (
-        payment.email?.toLowerCase().includes(searchLower) ||
-        payment.transactionId?.toLowerCase().includes(searchLower) ||
-        payment.tutorEmails?.some(email => email.toLowerCase().includes(searchLower))
+        payment?.email?.toLowerCase().includes(searchLower) ||
+        payment?.transactionId?.toLowerCase().includes(searchLower) ||
+        payment?.tutorEmails?.some(email => email.toLowerCase().includes(searchLower))
       );
     })
     .sort((a, b) => {
       if (sortBy === 'date') {
         return sortOrder === 'desc' 
-          ? new Date(b.date) - new Date(a.date)
-          : new Date(a.date) - new Date(b.date);
+          ? new Date(b?.date || 0) - new Date(a?.date || 0)
+          : new Date(a?.date || 0) - new Date(b?.date || 0);
       }
       if (sortBy === 'amount') {
         return sortOrder === 'desc' 
-          ? b.price - a.price
-          : a.price - b.price;
+          ? (Number(b?.price) || 0) - (Number(a?.price) || 0)
+          : (Number(a?.price) || 0) - (Number(b?.price) || 0);
       }
       return 0;
     });
@@ -242,7 +277,7 @@ const ManagePayments = () => {
                         </span>
                       </td>
                       <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm font-medium text-[#DA3A60]">
-                        ${payment.price.toFixed(2)}
+                        ${(Number(payment?.price) || 0).toFixed(2)}
                       </td>
                       <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-[#005482]">
                         {payment.tutorEmails?.join(', ')}
@@ -262,4 +297,11 @@ const ManagePayments = () => {
   );
 };
 
-export default ManagePayments;
+// Wrap the export with ErrorBoundary
+export default function WrappedManagePayments() {
+  return (
+    <ErrorBoundary>
+      <ManagePayments />
+    </ErrorBoundary>
+  );
+}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { useMutation } from '@tanstack/react-query';
@@ -6,22 +6,41 @@ import { AuthContext } from '../../providers/AuthProvider';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaChalkboardTeacher, FaGraduationCap, FaMoneyBillWave, FaCalendarAlt, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
+import {
+  FaChalkboardTeacher,
+  FaGraduationCap,
+  FaMoneyBillWave,
+  FaCalendarAlt,
+  FaClock,
+  FaMapMarkerAlt,
+} from 'react-icons/fa';
 
 const PostJob = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const [message, setMessage] = useState('');
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const mutation = useMutation({
     mutationFn: (data) => axiosSecure.post('/jobs', data),
     onSuccess: () => {
-      Swal.fire('Success', 'Job posted successfully!', 'success');
+      Swal.fire({
+        title: 'Job Posted Successfully!',
+        text: 'Ready to find your perfect tutor?',
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+        timerProgressBar: true
+      }).then(() => {
+        navigate('/');
+      });
       reset();
-      navigate('/dashboard');
     },
     onError: (error) => {
       if (error.response?.status === 402) {
@@ -71,10 +90,9 @@ const PostJob = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Subject and Grade Level */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Subject */}
               <div>
-                <label className="block text-sm font-medium text-[#005482] mb-2">
-                  Subject
-                </label>
+                <label className="block text-sm font-medium text-[#005482] mb-2">Subject</label>
                 <div className="relative">
                   <FaGraduationCap className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#70C5D7]" />
                   <select
@@ -91,10 +109,9 @@ const PostJob = () => {
                 {errors.subject && <span className="text-[#DA3A60] text-sm mt-1 block">{errors.subject.message}</span>}
               </div>
 
+              {/* Grade Level */}
               <div>
-                <label className="block text-sm font-medium text-[#005482] mb-2">
-                  Grade Level
-                </label>
+                <label className="block text-sm font-medium text-[#005482] mb-2">Grade Level</label>
                 <div className="relative">
                   <FaGraduationCap className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#70C5D7]" />
                   <select
@@ -115,61 +132,46 @@ const PostJob = () => {
 
             {/* Topics and Goals */}
             <div>
-              <label className="block text-sm font-medium text-[#005482] mb-2">
-                Topics or Goals
-              </label>
+              <label className="block text-sm font-medium text-[#005482] mb-2">Topics or Goals</label>
               <textarea
                 {...register('topicsGoals', { required: 'Topics or goals are required' })}
                 rows="4"
                 className="w-full px-4 py-3 border border-[#70C5D7]/20 rounded-xl focus:ring-2 focus:ring-[#70C5D7] focus:border-[#70C5D7] bg-white"
                 placeholder="Describe the specific topics you need help with or your learning goals"
               />
-              {errors.topicsGoals && <span className="text-[#DA3A60] text-sm mt-1 block">{errors.topicsGoals.message}</span>}
+              {errors.topicsGoals && (
+                <span className="text-[#DA3A60] text-sm mt-1 block">{errors.topicsGoals.message}</span>
+              )}
             </div>
 
-            {/* Learning Mode */}
+            {/* Mode of Learning */}
             <div className="bg-[#70C5D7]/10 p-6 rounded-xl">
-              <label className="block text-sm font-medium text-[#005482] mb-4">
-                Preferred Mode of Learning
-              </label>
+              <label className="block text-sm font-medium text-[#005482] mb-4">Preferred Mode of Learning</label>
               <div className="flex flex-wrap gap-4">
-                <label className="flex items-center p-3 bg-white rounded-lg cursor-pointer border border-[#70C5D7]/20 hover:border-[#70C5D7] transition-colors">
-                  <input
-                    type="radio"
-                    {...register('modeOfLearning', { required: 'Mode of learning is required' })}
-                    value="Online"
-                    className="mr-2"
-                  />
-                  <span className="text-[#005482]">Online</span>
-                </label>
-                <label className="flex items-center p-3 bg-white rounded-lg cursor-pointer border border-[#70C5D7]/20 hover:border-[#70C5D7] transition-colors">
-                  <input
-                    type="radio"
-                    {...register('modeOfLearning')}
-                    value="Offline"
-                    className="mr-2"
-                  />
-                  <span className="text-[#005482]">Offline</span>
-                </label>
-                <label className="flex items-center p-3 bg-white rounded-lg cursor-pointer border border-[#70C5D7]/20 hover:border-[#70C5D7] transition-colors">
-                  <input
-                    type="radio"
-                    {...register('modeOfLearning')}
-                    value="Either"
-                    className="mr-2"
-                  />
-                  <span className="text-[#005482]">Either</span>
-                </label>
+                {['Online', 'Offline', 'Either'].map((mode) => (
+                  <label
+                    key={mode}
+                    className="flex items-center p-3 bg-white rounded-lg cursor-pointer border border-[#70C5D7]/20 hover:border-[#70C5D7] transition-colors"
+                  >
+                    <input
+                      type="radio"
+                      {...register('modeOfLearning', { required: 'Mode of learning is required' })}
+                      value={mode}
+                      className="mr-2"
+                    />
+                    <span className="text-[#005482]">{mode}</span>
+                  </label>
+                ))}
               </div>
-              {errors.modeOfLearning && <span className="text-[#DA3A60] text-sm mt-2 block">{errors.modeOfLearning.message}</span>}
+              {errors.modeOfLearning && (
+                <span className="text-[#DA3A60] text-sm mt-2 block">{errors.modeOfLearning.message}</span>
+              )}
             </div>
 
             {/* Schedule and Budget */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-[#005482] mb-2">
-                  Sessions per Week
-                </label>
+                <label className="block text-sm font-medium text-[#005482] mb-2">Sessions per Week</label>
                 <div className="relative">
                   <FaClock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#70C5D7]" />
                   <select
@@ -184,13 +186,13 @@ const PostJob = () => {
                     <option value="5+">5+</option>
                   </select>
                 </div>
-                {errors.sessionsPerWeek && <span className="text-[#DA3A60] text-sm mt-1 block">{errors.sessionsPerWeek.message}</span>}
+                {errors.sessionsPerWeek && (
+                  <span className="text-[#DA3A60] text-sm mt-1 block">{errors.sessionsPerWeek.message}</span>
+                )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#005482] mb-2">
-                  Budget (per hour)
-                </label>
+                <label className="block text-sm font-medium text-[#005482] mb-2">Budget (per hour)</label>
                 <div className="relative">
                   <FaMoneyBillWave className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#70C5D7]" />
                   <input
@@ -203,12 +205,10 @@ const PostJob = () => {
               </div>
             </div>
 
-            {/* Availability and Start Date */}
+            {/* Availability and Negotiation */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-[#005482] mb-2">
-                  Preferred Start Date
-                </label>
+                <label className="block text-sm font-medium text-[#005482] mb-2">Preferred Start Date</label>
                 <div className="relative">
                   <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#70C5D7]" />
                   <input
@@ -220,9 +220,7 @@ const PostJob = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#005482] mb-2">
-                  Open to Negotiation
-                </label>
+                <label className="block text-sm font-medium text-[#005482] mb-2">Open to Negotiation</label>
                 <div className="relative">
                   <FaMoneyBillWave className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#70C5D7]" />
                   <select
@@ -234,25 +232,34 @@ const PostJob = () => {
                     <option value="No">No</option>
                   </select>
                 </div>
-                {errors.openToNegotiation && <span className="text-[#DA3A60] text-sm mt-1 block">{errors.openToNegotiation.message}</span>}
+                {errors.openToNegotiation && (
+                  <span className="text-[#DA3A60] text-sm mt-1 block">{errors.openToNegotiation.message}</span>
+                )}
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="pt-6">
+            {/* Location (Optional) */}
+            <div>
+              <label className="block text-sm font-medium text-[#005482] mb-2">Location (if offline)</label>
+              <div className="relative">
+                <FaMapMarkerAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#70C5D7]" />
+                <input
+                  type="text"
+                  {...register('location')}
+                  className="w-full pl-10 pr-4 py-3 border border-[#70C5D7]/20 rounded-xl focus:ring-2 focus:ring-[#70C5D7] focus:border-[#70C5D7] bg-white"
+                  placeholder="Enter location"
+                />
+              </div>
+            </div>
+
+            {/* Submit */}
+            <div className="pt-4">
               <button
                 type="submit"
                 disabled={mutation.isLoading}
-                className="w-full bg-[#DA3A60] text-white py-4 rounded-xl hover:bg-[#c43255] transition-colors duration-200 font-medium flex items-center justify-center gap-2"
+                className="w-full bg-[#005482] hover:bg-[#00416a] text-white font-semibold py-3 px-6 rounded-xl transition duration-300"
               >
-                {mutation.isLoading ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Posting...</span>
-                  </>
-                ) : (
-                  'Post Job'
-                )}
+                {mutation.isLoading ? 'Posting...' : 'Post Job'}
               </button>
             </div>
           </form>
@@ -263,5 +270,3 @@ const PostJob = () => {
 };
 
 export default PostJob;
-
-

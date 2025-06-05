@@ -163,7 +163,7 @@ const SignUp = () => {
             <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-6 overflow-y-auto">
                 <div className="w-full max-w-md space-y-8">
                     {/* Header */}
-                    <div className="text-center">
+                    <div className="text-center mt-8">
                         <h1 className="text-3xl font-bold text-[#005482] mb-2">Welcome!</h1>
                         <p className="text-gray-600">Create your account to get started</p>
                     </div>

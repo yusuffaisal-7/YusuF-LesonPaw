@@ -15,7 +15,6 @@ const Navbar = () => {
   const axiosSecure = useAxiosSecure();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [userData, setUserData] = useState({
     displayName: '',
@@ -49,7 +48,6 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-  const toggleResources = () => setResourcesOpen(!resourcesOpen);
   const toggleLanguage = () => setLanguageOpen(!languageOpen);
 
   const handleLogout = () => {
@@ -98,57 +96,26 @@ const Navbar = () => {
           <div className="hidden md:flex items-center justify-center flex-1 mx-8">
             <div className="flex items-center space-x-8">
               <NavLink
-                to="/"
+                to="/find-teacher"
                 className={({ isActive }) =>
                   `text-white hover:text-[#FCBB45] transition-colors ${
                     isActive ? "font-bold" : ""
                   }`
                 }
               >
-                {translate('home')}
+                {translate('findTeacher')}
               </NavLink>
 
-              {/* Resources Dropdown */}
-              <div className="relative group">
-                <button
-                  onClick={toggleResources}
-                  className="flex items-center text-white hover:text-[#FCBB45] transition-colors focus:outline-none group"
-                >
-                  <span>{translate('resources')}</span>
-                  <FaChevronDown className={`ml-1 h-4 w-4 transform transition-transform duration-200 ${
-                    resourcesOpen ? 'rotate-180' : ''
-                  }`} />
-                </button>
-
-                <div 
-                  className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transform transition-all duration-200 origin-top-left ${
-                    resourcesOpen 
-                      ? 'opacity-100 visible scale-100 translate-y-0' 
-                      : 'opacity-0 invisible scale-95 -translate-y-2'
-                  }`}
-                >
-                  <div className="py-1" role="menu">
-                    <Link
-                      to="/find-teacher"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#005482]/10 hover:text-[#005482] transition-all duration-200"
-                      role="menuitem"
-                      onClick={() => setResourcesOpen(false)}
-                    >
-                      <FaGraduationCap className="mr-2" />
-                      {translate('findTeacher')}
-                    </Link>
-                    <Link
-                      to="/become-teacher"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#005482]/10 hover:text-[#005482] transition-all duration-200"
-                      role="menuitem"
-                      onClick={() => setResourcesOpen(false)}
-                    >
-                      <FaChalkboardTeacher className="mr-2" />
-                      {translate('becomeTeacher')}
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              <NavLink
+                to="/become-teacher"
+                className={({ isActive }) =>
+                  `text-white hover:text-[#FCBB45] transition-colors ${
+                    isActive ? "font-bold" : ""
+                  }`
+                }
+              >
+                {translate('becomeTeacher')}
+              </NavLink>
 
               <NavLink
                 to="/about"
@@ -182,19 +149,6 @@ const Navbar = () => {
               >
                 {translate('blog')}
               </NavLink>
-
-              {user && (
-                <NavLink
-                  to="/dashboard"
-                  className={({ isActive }) =>
-                    `text-white hover:text-[#FCBB45] transition-colors ${
-                      isActive ? "font-bold" : ""
-                    }`
-                  }
-                >
-                  {translate('dashboard')}
-                </NavLink>
-              )}
             </div>
           </div>
 
@@ -396,34 +350,29 @@ const Navbar = () => {
               {translate('home')}
             </NavLink>
 
-            <div className="relative">
-              <button
-                onClick={toggleResources}
-                className="flex items-center w-full px-3 py-2 text-white hover:text-[#FCBB45] transition-colors"
-              >
-                <span>{translate('resources')}</span>
-                <FaChevronDown className="ml-1 h-4 w-4" />
-              </button>
+            <NavLink
+              to="/find-teacher"
+              className={({ isActive }) =>
+                `block px-3 py-2 rounded-md text-white hover:text-[#FCBB45] transition-colors ${
+                  isActive ? "font-bold" : ""
+                }`
+              }
+              onClick={() => setMenuOpen(false)}
+            >
+              {translate('findTeacher')}
+            </NavLink>
 
-              {resourcesOpen && (
-                <div className="pl-4 space-y-1">
-                  <Link
-                    to="/find-teacher"
-                    className="block px-3 py-2 text-white hover:text-[#FCBB45] transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {translate('findTeacher')}
-                  </Link>
-                  <Link
-                    to="/become-teacher"
-                    className="block px-3 py-2 text-white hover:text-[#FCBB45] transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {translate('becomeTeacher')}
-                  </Link>
-                </div>
-              )}
-            </div>
+            <NavLink
+              to="/become-teacher"
+              className={({ isActive }) =>
+                `block px-3 py-2 rounded-md text-white hover:text-[#FCBB45] transition-colors ${
+                  isActive ? "font-bold" : ""
+                }`
+              }
+              onClick={() => setMenuOpen(false)}
+            >
+              {translate('becomeTeacher')}
+            </NavLink>
 
             <NavLink
               to="/about"
